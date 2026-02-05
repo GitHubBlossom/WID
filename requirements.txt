@@ -1,0 +1,24 @@
+# Google API Dependencies
+google-auth==2.27.0
+google-auth-oauthlib==1.2.0
+google-auth-httplib2==0.2.0
+google-api-python-client==2.116.0
+
+# Scheduling
+APScheduler==3.10.4
+
+# AI/LLM Integration (Anthropic Claude)
+anthropic==0.18.1
+
+# Date/Time Handling
+python-dateutil==2.8.2
+pytz==2024.1
+
+# Configuration Management
+python-dotenv==1.0.1
+
+# Data Processing
+pandas==2.2.0
+
+# Logging
+colorlog==6.8.2

@@ -1,0 +1,29 @@
+[Unit]
+Description=Weekly Activity Summary Report Generator
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=youruser
+Group=youruser
+WorkingDirectory=/path/to/WID
+Environment="PATH=/path/to/WID/venv/bin:/usr/local/bin:/usr/bin:/bin"
+ExecStart=/path/to/WID/venv/bin/python /path/to/WID/main.py schedule
+Restart=always
+RestartSec=10
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/path/to/WID/reports /path/to/WID/token.json
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=weekly-activity-summary
+
+[Install]
+WantedBy=multi-user.target
