@@ -142,6 +142,9 @@ This will install:
 cp .env.example .env
 ```
 
+> **Note:** `.env.example` is a hidden file (starts with `.`). Use `ls -a` to verify it exists.
+> If you can't find it, create a new `.env` file manually and add the required settings from Step 3 below.
+
 ### Step 2: Edit Configuration
 
 Open `.env` in your favorite text editor:

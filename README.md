@@ -52,14 +52,18 @@ pip install -r requirements.txt
 
 1. Go to [Anthropic Console](https://console.anthropic.com/)
 2. Create an API key
-3. Copy the `.env.example` file to `.env`:
+3. Create your `.env` configuration file by copying the example template:
    ```bash
    cp .env.example .env
    ```
+   > **Note:** `.env.example` is a hidden file (starts with `.`). Use `ls -a` to see it.
+   > If you still can't find it, create `.env` manually with the content below.
+
 4. Add your Anthropic API key to `.env`:
    ```
    ANTHROPIC_API_KEY=your_api_key_here
    ```
+   A minimal `.env` file only needs this one line. See the [Configuration](#5-configuration) section for all available options.
 
 ### 5. Configuration
 
