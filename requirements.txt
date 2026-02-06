@@ -8,7 +8,7 @@ google-api-python-client==2.116.0
 APScheduler==3.10.4
 
 # AI/LLM Integration (Anthropic Claude)
-anthropic==0.18.1
+anthropic>=0.39.0,<1.0.0
 
 # Date/Time Handling
 python-dateutil==2.8.2
