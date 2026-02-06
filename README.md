@@ -222,6 +222,13 @@ ANTHROPIC_API_KEY=sk-ant-...
 
 Make sure you have authorized the application with all required scopes. Delete `token.json` and run `python main.py test-auth` again.
 
+### `Client.__init__() got an unexpected keyword argument 'proxies'`
+
+This means the `anthropic` package is outdated and incompatible with your version of `httpx`. Upgrade it:
+```bash
+pip install "anthropic>=0.39.0,<1.0.0"
+```
+
 ### No emails/events/documents found
 
 Check that:
