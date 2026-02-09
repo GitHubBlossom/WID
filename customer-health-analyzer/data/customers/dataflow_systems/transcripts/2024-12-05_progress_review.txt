@@ -1,0 +1,16 @@
+Call Transcript - Progress Review
+Date: 2024-12-05
+Participants: James Morton (DataFlow - Engineering Manager), Nina Patel (CSM)
+Duration: 25 minutes
+
+Nina: James! How have things been?
+
+James: Night and day, Nina. The performance tuning cut scan times by 35%. The team is happy. We completed rollout to all 8 microservice repos.
+
+Nina: Your scan numbers are up 150% from last month.
+
+James: We've been aggressive about adopting it everywhere. I presented results at our engineering all-hands and got great feedback. We're looking at adding pre-commit hooks next quarter.
+
+Nina: Great ideas. Speaking of which, early renewals come with some nice benefits...
+
+James: Send me the details. I want to be fully adopted by renewal time. The ROI story is clear - we prevented at least 5 potential credential leaks this quarter.

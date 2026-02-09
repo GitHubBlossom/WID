@@ -1,0 +1,20 @@
+Call Transcript - Quarterly Check-in
+Date: 2025-01-10
+Participants: Marcus Johnson (SecureOps - DevOps Lead), Emily Chen (CSM)
+Duration: 30 minutes
+
+Emily: Marcus, happy new year! How's the team doing?
+
+Marcus: Hey Emily. Things are actually going pretty well. After the training and config fixes, the team has really come around. We're scanning consistently now and the false positive rate is manageable.
+
+Emily: Your numbers show it - scans are up 200% from October and your remediation time has dropped significantly.
+
+Marcus: Yeah, the team has a process now. Secret found, ticket created, fixed within 4 hours. It's become routine, which is exactly what you want with security tooling.
+
+Emily: Any remaining concerns?
+
+Marcus: The reporting could be better - I need to manually compile metrics for my monthly security review. And honestly, my manager has stopped asking about alternatives, which is a good sign.
+
+Emily: That's great progress. Let's keep the momentum going.
+
+Marcus: Sounds good. And Emily - thanks for sticking with us through the rough patch. Not every vendor would have put in that effort.

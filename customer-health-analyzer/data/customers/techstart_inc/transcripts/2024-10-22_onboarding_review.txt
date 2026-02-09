@@ -1,0 +1,28 @@
+Call Transcript - Post-Onboarding Review
+Date: 2024-10-22
+Participants: Alex Rivera (TechStart - CTO), Rachel Kim (CSM)
+Duration: 35 minutes
+
+Rachel: Hey Alex, thanks for hopping on. How's the team settling in with the platform?
+
+Alex: Rachel, I gotta say, the onboarding was one of the smoothest I've experienced with a security tool. The docs were clear, the API was well-designed, and my team had it running in our pipeline within two days.
+
+Rachel: That's wonderful to hear. What's been the biggest win so far?
+
+Alex: We caught a Stripe API key that one of our junior devs accidentally committed. That alone justified the purchase. The pre-commit hook integration means we're catching things before they even hit the repo.
+
+Rachel: Are you using the pre-commit hooks across all repos now?
+
+Alex: Yep, all 12 of our active repos. The team actually requested it after seeing the first catch. Nobody wants to be the person who leaks a production key.
+
+Rachel: Any friction points?
+
+Alex: Minor stuff. The initial scan of our legacy repos flagged a lot of old test credentials. Took us a day to triage and mark them as resolved. But that's expected with any new tool.
+
+Rachel: Makes sense. I can share some best practices for legacy repo scanning if that would help.
+
+Alex: Please do. We're actually thinking about rolling this out to our contractor teams too. Would that require additional licenses?
+
+Rachel: Let me check on the licensing and get back to you. That's a great sign of adoption though!
+
+Alex: It's a no-brainer for us. The team loves it.

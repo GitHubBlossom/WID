@@ -1,0 +1,13 @@
+From: Alex Rivera <alex@techstart.io>
+To: Rachel Kim <rachel.kim@company.com>
+Date: 2024-12-20
+Subject: RE: Early Renewal Options
+
+Rachel,
+
+Reviewed the renewal options. The 2-year deal with the 15% discount makes sense for us. I've forwarded to our finance team for approval. Should be straightforward.
+
+Also, we're hiring 5 more engineers in Q1. Will we need to adjust our license count? Want to make sure we're covered.
+
+Happy holidays!
+Alex

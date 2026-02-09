@@ -1,0 +1,21 @@
+customer_name,arr,renewal_date,logins_30d,features_used,tickets_30d,last_response_days,scans_30d,secrets_found,secrets_fixed
+Acme Corp,75000,2025-04-15,22,8,3,1,55,12,10
+TechStart Inc,45000,2025-05-20,25,9,4,1,70,8,8
+SecureOps LLC,60000,2025-03-30,6,3,9,12,15,20,5
+DataFlow Systems,55000,2025-06-10,20,7,3,2,50,10,9
+CloudNine Tech,30000,2025-07-15,28,10,3,1,80,6,6
+DevShield IO,85000,2025-04-01,24,8,4,2,65,14,13
+CodeWatch Pro,40000,2025-05-30,18,7,2,3,45,9,8
+NetGuard Solutions,95000,2025-03-15,5,2,11,15,10,25,6
+AppSec Dynamics,35000,2025-08-01,30,9,3,1,75,5,5
+CyberVault Inc,100000,2025-04-20,21,8,4,2,60,11,10
+StackSafe Co,25000,2025-06-15,15,6,3,3,40,7,6
+PipelinePro Ltd,50000,2025-05-01,8,4,7,8,20,18,8
+BuildGuard Inc,70000,2025-04-10,23,9,3,1,58,9,9
+ScanMaster IO,20000,2025-07-30,12,5,2,5,30,4,3
+DevOpsForge,65000,2025-03-20,4,2,12,18,8,22,4
+SecretKeeper Co,15000,2025-08-15,26,8,4,1,72,7,7
+CodeSentry LLC,80000,2025-04-25,19,7,5,3,48,15,12
+InfraWatch Inc,42000,2025-06-01,7,3,8,10,18,19,7
+DeploySafe IO,38000,2025-05-15,22,8,3,2,55,8,8
+AuthGuard Tech,55000,2025-07-01,16,6,6,4,35,13,11

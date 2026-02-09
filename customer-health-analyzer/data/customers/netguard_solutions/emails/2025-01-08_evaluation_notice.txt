@@ -1,0 +1,12 @@
+From: Robert Kim <robert.kim@netguard.io>
+To: David Chen <david.chen@company.com>
+Date: 2025-01-08
+Subject: Vendor Evaluation Update
+
+David,
+
+FYI - our evaluation is wrapping up this month. We've been running GitGuardian in parallel for the past 6 weeks. Their infrastructure scanning capabilities are significantly ahead for our Terraform/Kubernetes use case.
+
+Unless there are major changes on your end, we're leaning toward switching.
+
+Robert

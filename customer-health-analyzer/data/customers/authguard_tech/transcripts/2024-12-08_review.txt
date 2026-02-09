@@ -1,0 +1,22 @@
+Call Transcript - Account Review
+Date: 2024-12-08
+Participants: Mike Chang (AuthGuard - Security Engineer), Emily Chen (CSM)
+Duration: 25 minutes
+
+Emily: Mike, how's everything going with the platform?
+
+Mike: Pretty good, Emily. We've been using it primarily for our authentication service repos since those are the most sensitive. Found some good catches - API keys and JWT secrets that shouldn't have been in code.
+
+Emily: Are you planning to expand to other repos?
+
+Mike: Eventually. We want to make sure we have the workflow solid in our auth repos first before rolling out company-wide. We're tracking about 6 features actively.
+
+Emily: Makes sense. Any blockers?
+
+Mike: The support ticket volume has been higher than I'd like. We had 6 tickets last month, mostly around configuration. The tool is powerful but the learning curve is steeper than expected.
+
+Emily: I hear that feedback. Would a dedicated training session help?
+
+Mike: Probably. Let's schedule something for January. I want to make sure we're getting full value before our July renewal.
+
+Emily: Absolutely. Let's make it happen.

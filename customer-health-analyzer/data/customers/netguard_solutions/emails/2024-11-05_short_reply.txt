@@ -1,0 +1,10 @@
+From: Robert Kim <robert.kim@netguard.io>
+To: David Chen <david.chen@company.com>
+Date: 2024-11-05
+Subject: RE: Dedicated Solutions Architect Update
+
+David,
+
+Noted. Have your SA contact my DevOps lead directly.
+
+Robert

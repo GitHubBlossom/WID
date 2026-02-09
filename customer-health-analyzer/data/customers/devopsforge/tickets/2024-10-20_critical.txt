@@ -1,0 +1,20 @@
+Support Ticket #4465
+Date: 2024-10-20
+Customer: DevOpsForge
+Contact: Ryan Peters
+Priority: Critical
+Subject: Helm Chart Scanning Completely Broken
+
+Description:
+Every helm chart scan produces 50+ false positives. Template variables are being flagged as secrets. This tool is unusable for our Kubernetes deployments.
+
+---
+Support Response (2024-10-20, 6 hours later):
+We're working on improved Helm chart parsing. As a workaround, you can exclude .yaml template files.
+
+---
+Customer Response (2024-10-21):
+6 hour response on a critical ticket? And your solution is to not scan our most important files? Not acceptable.
+
+Status: Partially Resolved
+Customer Satisfaction: Very Dissatisfied

@@ -1,0 +1,56 @@
+customer_name,date,intervention_type,channel,trigger_reason,outcome,days_to_outcome,notes
+Acme Corp,2024-10-20,check_in_email,email,routine_touchpoint,no_response,7,Quarterly check-in sent no reply
+Acme Corp,2024-11-05,executive_call,phone,declining_usage,score_improved,14,VP Engineering joined call discussed roadmap
+Acme Corp,2024-12-01,technical_escalation,zoom,support_ticket_spike,issue_resolved,5,Resolved CI/CD integration failures
+Acme Corp,2025-01-10,executive_call,phone,competitive_mention,no_response,21,Customer mentioned evaluating alternatives
+Acme Corp,2025-01-20,executive_business_review,zoom,renewal_approaching,no_response,14,EBR scheduled but customer postponed twice
+TechStart Inc,2024-10-15,check_in_email,email,routine_touchpoint,usage_increased,10,Shared best practices guide
+TechStart Inc,2024-12-01,executive_business_review,zoom,renewal_approaching,renewed,30,Discussed expansion showed ROI metrics
+TechStart Inc,2025-01-05,custom_training,zoom,routine_touchpoint,usage_increased,7,Advanced features training for new team members
+SecureOps LLC,2024-10-01,technical_escalation,zoom,support_ticket_spike,issue_resolved,3,Critical integration bug fixed
+SecureOps LLC,2024-10-20,executive_call,phone,declining_usage,score_improved,21,Discussed adoption blockers created action plan
+SecureOps LLC,2024-11-15,custom_training,zoom,declining_usage,usage_increased,14,Hands-on workshop for dev team
+SecureOps LLC,2024-12-10,check_in_email,email,routine_touchpoint,score_improved,7,Shared success metrics from training
+SecureOps LLC,2025-01-05,executive_business_review,zoom,renewal_approaching,score_improved,14,QBR showed improvement trajectory
+DataFlow Systems,2024-10-10,technical_escalation,zoom,support_ticket_spike,issue_resolved,4,Resolved webhook configuration issues
+DataFlow Systems,2024-11-01,custom_training,zoom,declining_usage,usage_increased,10,Team onboarding for secret scanning
+DataFlow Systems,2024-12-05,executive_call,phone,routine_touchpoint,score_improved,7,Positive feedback on recent improvements
+DataFlow Systems,2025-01-15,check_in_email,email,routine_touchpoint,usage_increased,3,Quick response with feature adoption update
+CloudNine Tech,2024-11-01,check_in_email,email,routine_touchpoint,usage_increased,5,Shared new feature announcements
+CloudNine Tech,2025-01-10,custom_training,zoom,routine_touchpoint,usage_increased,7,API integration workshop
+DevShield IO,2024-10-15,executive_call,phone,competitive_mention,score_improved,14,Addressed competitive concerns showed unique value
+DevShield IO,2024-12-01,executive_business_review,zoom,renewal_approaching,renewed,21,Multi-year renewal discussion initiated
+DevShield IO,2025-01-20,check_in_email,email,routine_touchpoint,no_response,14,Holiday period low response
+NetGuard Solutions,2024-10-05,technical_escalation,zoom,support_ticket_spike,issue_resolved,2,Emergency fix for scanning pipeline
+NetGuard Solutions,2024-11-01,executive_call,phone,declining_usage,no_response,30,VP Security unavailable for calls
+NetGuard Solutions,2024-12-10,executive_business_review,zoom,renewal_approaching,no_response,21,EBR cancelled by customer twice
+NetGuard Solutions,2025-01-15,executive_call,phone,negative_sentiment,churned,45,Customer decided not to renew
+PipelinePro Ltd,2024-11-01,technical_escalation,zoom,support_ticket_spike,issue_resolved,7,Resolved false positive flooding
+PipelinePro Ltd,2024-12-05,executive_call,phone,declining_usage,score_improved,14,Identified training gaps created plan
+PipelinePro Ltd,2025-01-10,custom_training,zoom,declining_usage,usage_increased,10,Targeted training on pipeline integration
+CyberVault Inc,2024-10-20,executive_business_review,zoom,renewal_approaching,renewed,30,Enterprise renewal with expansion
+CyberVault Inc,2025-01-05,check_in_email,email,routine_touchpoint,no_response,14,Auto check-in no reply needed
+BuildGuard Inc,2024-11-15,check_in_email,email,routine_touchpoint,score_improved,3,Quick positive response
+BuildGuard Inc,2025-01-20,executive_business_review,zoom,renewal_approaching,renewed,14,Early renewal discussion positive
+DevOpsForge,2024-10-10,technical_escalation,zoom,support_ticket_spike,issue_resolved,5,Fixed scanning timeout issues
+DevOpsForge,2024-11-20,executive_call,phone,declining_usage,no_response,30,Could not reach decision maker
+DevOpsForge,2024-12-15,executive_call,phone,negative_sentiment,no_response,21,Brief call customer distracted
+DevOpsForge,2025-01-10,executive_business_review,zoom,renewal_approaching,churned,30,Customer chose competitor solution
+CodeSentry LLC,2024-11-01,slack_outreach,slack,routine_touchpoint,score_improved,5,Quick engagement in shared channel
+CodeSentry LLC,2024-12-10,executive_call,phone,competitive_mention,score_improved,14,Addressed Snyk comparison successfully
+CodeSentry LLC,2025-01-15,technical_escalation,zoom,support_ticket_spike,issue_resolved,3,Resolved scan accuracy concern
+InfraWatch Inc,2024-10-15,technical_escalation,zoom,support_ticket_spike,tickets_decreased,7,Resolved recurring infrastructure scan issues
+InfraWatch Inc,2024-11-20,executive_call,phone,declining_usage,no_response,21,Customer non-committal on adoption plan
+InfraWatch Inc,2025-01-05,custom_training,zoom,declining_usage,usage_increased,14,Infrastructure team training session
+ScanMaster IO,2024-12-01,check_in_email,email,routine_touchpoint,no_response,14,Low engagement small account
+ScanMaster IO,2025-01-15,slack_outreach,slack,routine_touchpoint,score_improved,3,Got quick response in Slack
+StackSafe Co,2024-11-10,custom_training,zoom,routine_touchpoint,usage_increased,7,New team member onboarding
+StackSafe Co,2025-01-20,check_in_email,email,routine_touchpoint,score_improved,5,Positive quarterly check-in
+AuthGuard Tech,2024-10-20,technical_escalation,zoom,support_ticket_spike,issue_resolved,4,Auth scanning configuration fixed
+AuthGuard Tech,2024-12-01,executive_call,phone,routine_touchpoint,score_improved,10,Good relationship building call
+AuthGuard Tech,2025-01-10,executive_business_review,zoom,renewal_approaching,renewed,21,Renewal confirmed with minor expansion
+SecretKeeper Co,2024-11-15,check_in_email,email,routine_touchpoint,usage_increased,5,Shared tips for small team optimization
+SecretKeeper Co,2025-01-20,slack_outreach,slack,routine_touchpoint,score_improved,2,Active Slack engagement
+DeploySafe IO,2024-10-10,custom_training,zoom,routine_touchpoint,usage_increased,7,Initial onboarding training
+DeploySafe IO,2024-12-15,check_in_email,email,routine_touchpoint,score_improved,5,Mid-quarter positive check-in
+DeploySafe IO,2025-01-25,executive_business_review,zoom,renewal_approaching,renewed,14,Straightforward renewal conversation

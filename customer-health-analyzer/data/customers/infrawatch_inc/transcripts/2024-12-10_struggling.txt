@@ -1,0 +1,20 @@
+Call Transcript - Technical Review
+Date: 2024-12-10
+Participants: Tony Martinez (InfraWatch - DevOps Lead), Sarah Mitchell (CSM)
+Duration: 20 minutes
+
+Sarah: Tony, how's the adoption going?
+
+Tony: Honestly Sarah, it's been slow. We're an infrastructure-heavy shop - most of our code is Terraform, Ansible, and Kubernetes manifests. The scanner is great for application code but struggles with infrastructure-as-code.
+
+Sarah: We've been improving IaC support. Have you tried the latest configuration options?
+
+Tony: We tried but the false positive rate on Terraform is still too high. My team has basically stopped using it for infrastructure repos and only scans our Python services.
+
+Sarah: That's concerning. Let me schedule a focused session on IaC scanning.
+
+Tony: Sure, but I'm skeptical. We've been through this before. My team is also being reorganized - new VP coming in next month who's going to re-evaluate all our tooling.
+
+Sarah: I'd love to get in front of the new VP early.
+
+Tony: I'll try to make that happen. But no promises - she's going to want to make her own assessments.

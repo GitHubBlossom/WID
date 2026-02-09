@@ -1,0 +1,12 @@
+From: Amy Liu <amy.liu@codewatchpro.com>
+To: Rachel Kim <rachel.kim@company.com>
+Date: 2025-01-12
+Subject: Training Session Follow-up
+
+Rachel,
+
+The training session was really helpful. We've already set up 5 custom patterns for our internal credentials format. Caught 2 leaked tokens within the first hour!
+
+This tool keeps getting more valuable the more we learn. Thanks for the great support.
+
+Amy

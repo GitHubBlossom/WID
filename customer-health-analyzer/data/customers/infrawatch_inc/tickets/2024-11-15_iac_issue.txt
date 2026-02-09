@@ -1,0 +1,20 @@
+Support Ticket #4590
+Date: 2024-11-15
+Customer: InfraWatch Inc
+Contact: Tony Martinez
+Priority: High
+Subject: Ansible Vault Detection Failing
+
+Description:
+Scanner not properly detecting when Ansible vault files are decrypted in CI pipeline. This is a critical use case for us.
+
+---
+Support Response (2024-11-15, 3 hours later):
+Ansible vault detection is in beta. We've enabled the beta feature on your account.
+
+---
+Customer Response (2024-11-16):
+Beta feature partially works but misses encrypted variables embedded in playbooks. Need full support, not beta.
+
+Status: Partially Resolved
+Customer Satisfaction: Dissatisfied

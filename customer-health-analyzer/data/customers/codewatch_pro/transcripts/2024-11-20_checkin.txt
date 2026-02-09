@@ -1,0 +1,16 @@
+Call Transcript - Monthly Check-in
+Date: 2024-11-20
+Participants: Amy Liu (CodeWatch - Tech Lead), Rachel Kim (CSM)
+Duration: 25 minutes
+
+Rachel: Amy, how's the team doing?
+
+Amy: Really well. We integrated the scanning into our PR review process and it's caught several leaked API keys that would have gone to production. The team sees it as a safety net now.
+
+Rachel: That's exactly the right framing. Any issues?
+
+Amy: Nothing major. The docs could use more Python-specific examples but we're managing fine. Feature adoption is good - we're using 7 of the 10 features now.
+
+Rachel: Would you like a training session on the remaining features?
+
+Amy: That would be great, actually. The custom pattern feature looks interesting but we haven't had time to explore it.

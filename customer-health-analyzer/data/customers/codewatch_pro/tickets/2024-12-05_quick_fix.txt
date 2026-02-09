@@ -1,0 +1,20 @@
+Support Ticket #4695
+Date: 2024-12-05
+Customer: CodeWatch Pro
+Contact: Amy Liu
+Priority: Medium
+Subject: Scan Timeout on Large PR
+
+Description:
+Scan timing out on PRs with 200+ file changes.
+
+---
+Support Response (2024-12-05, 1 hour later):
+Increased timeout threshold and enabled chunked scanning for large PRs. Should resolve the issue.
+
+---
+Customer Response (2024-12-05):
+Works now. Thanks for the quick fix!
+
+Status: Resolved
+Customer Satisfaction: Satisfied

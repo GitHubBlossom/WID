@@ -1,0 +1,24 @@
+Support Ticket #4430
+Date: 2024-10-05
+Customer: SecureOps LLC
+Contact: Marcus Johnson
+Priority: Critical
+Subject: GitLab Integration Completely Broken After Update
+
+Description:
+After updating to latest version, our GitLab CI integration is completely non-functional. Every scan job fails with "connection refused" error. This is blocking ALL deployments.
+
+---
+Support Response (2024-10-05, 30 minutes later):
+Hi Marcus, this is a critical issue. The update changed the default port from 8080 to 8443.
+
+---
+Customer Response (2024-10-05):
+Port change fixed the connection error but now scans are timing out. This is getting worse, not better.
+
+---
+Resolution (2024-10-07):
+Senior engineer identified combination of issues: port change + memory allocation + monorepo configuration. Deployed comprehensive fix.
+
+Status: Resolved (after 2 days)
+Customer Satisfaction: Very Dissatisfied - "Took way too long for a critical production issue"

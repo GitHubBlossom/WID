@@ -1,0 +1,20 @@
+Call Transcript - Quarterly Review
+Date: 2024-12-12
+Participants: Karen Wilson (DeploySafe - Engineering Lead), James Rodriguez (CSM)
+Duration: 25 minutes
+
+James: Karen, how's everything going?
+
+Karen: Really well, James. We hit a milestone this quarter - zero secrets leaked to production for the first time since we started tracking. The scanning workflow has been bulletproof.
+
+James: Congratulations! That's a huge achievement.
+
+Karen: The team is really proud of it. Our CISO presented the metrics at the company all-hands. It's become a competitive advantage for us when talking to customers about our security practices.
+
+James: Any areas for improvement?
+
+Karen: Just the usual request for better reporting dashboards. But overall, this is one of the tools our team would fight to keep if budget cuts came.
+
+James: That's the best endorsement we could ask for. Let me know if you need anything for the renewal conversation.
+
+Karen: Already budgeted and approved. Easiest renewal of the year.

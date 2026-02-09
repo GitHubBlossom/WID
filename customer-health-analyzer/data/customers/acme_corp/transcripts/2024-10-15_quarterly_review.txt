@@ -1,0 +1,28 @@
+Call Transcript - Quarterly Business Review
+Date: 2024-10-15
+Participants: Sarah Chen (Acme Corp - Head of Security), David Park (Acme Corp - VP Engineering), Mike Johnson (CSM)
+Duration: 45 minutes
+
+Mike: Thanks for joining today, Sarah and David. Really appreciate you both making time for this. Let's dig into how things have been going this quarter.
+
+Sarah: Hey Mike! Yeah, things have been going really well honestly. The team has really embraced the scanning workflow. We went from maybe 60% adoption to almost full coverage across all our repos.
+
+David: I'll second that. From an engineering leadership perspective, the integration into our CI/CD pipeline has been smooth. The developers aren't complaining about it anymore, which in my world is high praise.
+
+Mike: That's great to hear. I'm seeing your scan numbers are up 40% quarter over quarter. What's driving that?
+
+Sarah: We rolled it out to the mobile team last month. They had some initial resistance but once they saw how it caught a hardcoded AWS key in a PR, they were sold. That could have been a serious incident.
+
+David: The ROI story is clear for us. We prevented at least three potential secret exposures this quarter alone. When I present to the board, that's the kind of metric they understand.
+
+Mike: That's fantastic. Any areas where you'd like to see improvement?
+
+Sarah: A couple of things. The false positive rate on our Python repos is still a bit higher than I'd like. Maybe around 15%. And we'd love to see better Terraform support for our infrastructure-as-code scanning.
+
+Mike: Both great points. I can get you connected with our solutions architect for the Python tuning. And Terraform improvements are actually on our Q1 roadmap.
+
+David: Perfect. We're planning our security tooling budget for next year and this is definitely in the core stack. Just need to make sure the ROI numbers are clean for the CFO presentation.
+
+Mike: I can help put together an ROI report for that. Let me send you our executive summary template.
+
+Sarah: That would be awesome, thanks Mike.

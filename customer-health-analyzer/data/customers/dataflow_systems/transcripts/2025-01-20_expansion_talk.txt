@@ -1,0 +1,16 @@
+Call Transcript - Expansion Discussion
+Date: 2025-01-20
+Participants: James Morton (DataFlow - Engineering Manager), Maria Santos (DataFlow - VP Engineering), Nina Patel (CSM)
+Duration: 35 minutes
+
+Nina: Thanks for joining us Maria.
+
+Maria: Hi Nina. James has been championing this internally and the results speak for themselves. We prevented a potential data breach last month. That alone probably saved us $200K in breach costs. The ROI is clear.
+
+Nina: Are you thinking about expanding the license count?
+
+Maria: We're hiring 15 new engineers in Q1. We'll need to scale up. I also want to explore the enterprise tier for SOC2 compliance dashboards.
+
+James: The dedicated support alone would be worth it. Your support team is already great.
+
+Maria: Put together the numbers, Nina. If it makes sense, we can move fast on this.

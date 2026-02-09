@@ -1,0 +1,20 @@
+Support Ticket #4415
+Date: 2024-10-03
+Customer: NetGuard Solutions
+Contact: DevOps Team
+Priority: Critical
+Subject: Scanner Crashes on Terraform Plan Files
+
+Description:
+The scanner consistently crashes when processing Terraform plan output files. This is the 4th ticket about Terraform compatibility this month.
+
+---
+Customer Response (2024-10-03):
+If we exclude all Terraform-related files, what's the point of the tool for our infrastructure repos? We need this to WORK with Terraform, not ignore it.
+
+---
+Customer Response (2024-10-04):
+Please do. We're running out of patience.
+
+Status: Partially Resolved
+Customer Satisfaction: Very Dissatisfied

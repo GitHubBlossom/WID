@@ -1,0 +1,16 @@
+Call Transcript - Technical Review
+Date: 2024-11-20
+Participants: Chris Taylor (PipelinePro - DevOps Manager), James Rodriguez (CSM)
+Duration: 25 minutes
+
+James: Chris, how's the implementation going?
+
+Chris: Not great, James. We're drowning in false positives. Our CI pipeline flags 30-40 items per scan and 80% of them are false. The dev team is just ignoring the scan results at this point.
+
+James: That's concerning. Are you using the allowlisting feature?
+
+Chris: We've tried but it's tedious. Every time we resolve a false positive, two more pop up. It feels like whack-a-mole. My team is frustrated and frankly, they're questioning whether this tool is worth the effort.
+
+James: Let me get our solutions architect involved. We can do a focused tuning session.
+
+Chris: That would help. But honestly, if we don't see significant improvement in the next month, I'm going to have to recommend we look at other options. Our pipeline velocity has dropped 15% since we added the scan step.

@@ -1,0 +1,16 @@
+Support Ticket #4885
+Date: 2025-01-08
+Customer: DataFlow Systems
+Contact: James Morton
+Priority: Low
+Subject: SOC2 Compliance Report Export
+
+Description:
+Preparing for SOC2 audit. Can we get the compliance reporting feature enabled for trial?
+
+---
+Customer Response (2025-01-09):
+This is exactly what we needed. The compliance dashboard is really well designed. Maria is impressed. We'll likely be upgrading soon.
+
+Status: Resolved
+Customer Satisfaction: Very Satisfied

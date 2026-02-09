@@ -1,0 +1,20 @@
+Call Transcript - Account Status Call
+Date: 2025-01-12
+Participants: Robert Kim (NetGuard - VP Security), David Chen (CSM)
+Duration: 10 minutes
+
+David: Robert, I wanted to touch base on the evaluation.
+
+Robert: David, we've made a decision. We're going to move to GitGuardian. Their infrastructure scanning is more mature for our use case, and the pricing is better.
+
+David: Is there anything we can do to change the direction?
+
+Robert: At this point, no. The team has already started the migration plan. It's not personal - your product doesn't fit our infrastructure-heavy environment well enough.
+
+David: I understand. Is there anything I can do to make the transition smooth?
+
+Robert: Just make sure we can export our historical scan data.
+
+David: Absolutely. Robert, if things change, the door is always open.
+
+Robert: Thanks David. No hard feelings.

@@ -1,0 +1,8 @@
+Slack Channel: #cloudnine-support
+Date: 2025-01-10
+
+[9:00 AM] Lisa Park: Morning! Quick question - can we set up separate notification channels per repo? Want critical repos to alert our on-call team directly.
+
+[9:05 AM] Rachel Kim: Yes! Under Settings > Notifications you can create per-repo routing rules. Here's the guide: [link]
+
+[9:10 AM] Lisa Park: Perfect, exactly what I needed. You guys always have a solution ready. 🙌

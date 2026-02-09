@@ -1,0 +1,10 @@
+From: Chris Taylor <chris.t@pipelinepro.com>
+To: James Rodriguez <james.rodriguez@company.com>
+Date: 2025-01-05
+Subject: RE: Training Session Follow-up
+
+James,
+
+The tuning session helped somewhat. False positive rate is down to about 40% from 80%. Better but still not where it needs to be. Team morale around the tool is still low.
+
+Chris

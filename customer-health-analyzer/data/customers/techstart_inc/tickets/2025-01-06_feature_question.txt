@@ -1,0 +1,22 @@
+Support Ticket #4878
+Date: 2025-01-06
+Customer: TechStart Inc
+Contact: Priya Patel
+Priority: Low
+Subject: Custom Pattern Regex Help
+
+Description:
+We're setting up custom patterns for our internal API tokens. The format is "TST_" followed by 32 hex characters. What regex should we use?
+
+---
+Support Response (2025-01-06, 30 minutes later):
+Hi Priya! The pattern would be: TST_[a-fA-F0-9]{32}
+
+You can add it under Settings > Custom Patterns with severity "High" since these are production tokens.
+
+---
+Customer Response (2025-01-06):
+Works perfectly! Already caught one in our staging config. You're the best support team we work with, hands down.
+
+Status: Resolved
+Customer Satisfaction: Very Satisfied

@@ -1,0 +1,20 @@
+From: Sarah Chen <sarah.chen@acmecorp.com>
+To: Mike Johnson <mike.johnson@company.com>
+Date: 2024-10-20
+Subject: Feature Request - Custom Reporting Dashboard
+
+Hi Mike,
+
+Following up on our QBR conversation. The team would love to see a custom reporting dashboard where we can track secret detection trends over time. Specifically:
+
+1. Monthly trend of secrets found vs. fixed
+2. Time-to-remediation metrics by team
+3. False positive rate tracking
+4. Coverage percentage across repos
+
+This would be huge for our board presentations and would help us justify the investment. David mentioned he'd be willing to do a case study if we could get something like this.
+
+Also, wanted to say thanks again for the ROI template you sent over. Really well done - made my budget presentation much easier.
+
+Best,
+Sarah

@@ -1,0 +1,24 @@
+Call Transcript - Regular Check-in
+Date: 2024-10-20
+Participants: Kevin Walsh (DevShield - Director of Engineering), Sarah Mitchell (CSM)
+Duration: 30 minutes
+
+Sarah: Kevin, how's everything going this quarter?
+
+Kevin: Hey Sarah. The product is working well technically. Usage is up, team is engaged. No major complaints from the engineering side.
+
+Sarah: Great. Your scan numbers are impressive - 65 scans last month with a 93% fix rate.
+
+Kevin: Yeah, the team has the workflow down. But I wanted to give you a heads up on something. Our CFO is doing a company-wide vendor consolidation exercise. Every department has to justify every tool.
+
+Sarah: I see. How can I help make that case?
+
+Kevin: I think we're fine, but it would help to have an updated ROI report. The CFO is comparing everything on a cost-per-value basis. She's been talking about consolidating vendors and reducing our security stack from 8 tools to 5.
+
+Sarah: That's understandable. I'll prepare a comprehensive value report. Is there a specific format she prefers?
+
+Kevin: Whatever shows clear dollar savings. She's very numbers-driven. Also, between us, she's been talking to Snyk about their full platform approach - bundling SCA, SAST, and secret scanning together. The "one vendor for everything" pitch is appealing from a procurement perspective.
+
+Sarah: I appreciate the transparency. Our secret scanning detection rates are significantly higher than bundled solutions. Let me put together a comparison.
+
+Kevin: That would help. But honestly, if the CFO decides to go with a bundled vendor, my hands are tied. I'll fight for it but it's her call.

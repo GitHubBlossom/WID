@@ -1,0 +1,20 @@
+Support Ticket #4580
+Date: 2024-11-15
+Customer: DevShield IO
+Contact: Engineering Team
+Priority: Low
+Subject: API Rate Limit Increase Request
+
+Description:
+Need rate limit increase for our CI/CD pipeline. Current limit causing scan queue delays during peak deployment hours.
+
+---
+Support Response (2024-11-15, 2 hours later):
+Rate limit increased to 500 requests/hour. Should resolve the queue delays.
+
+---
+Customer Response (2024-11-16):
+Confirmed, no more delays. Thanks.
+
+Status: Resolved
+Customer Satisfaction: Satisfied

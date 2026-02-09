@@ -1,0 +1,20 @@
+Call Transcript - End of Year Review
+Date: 2024-12-15
+Participants: Sandra Lee (BuildGuard - Head of Security), Sarah Mitchell (CSM)
+Duration: 30 minutes
+
+Sarah: Sandra, let's wrap up the year. How's everything looking?
+
+Sandra: Really good, Sarah. The team has fully adopted the scanning workflow. We're at 100% coverage and our secret remediation time is under 2 hours.
+
+Sarah: That's excellent. Any concerns going into next year?
+
+Sandra: Nothing major. We did have our CFO ask about bundling options - apparently Snyk offered them a combined SCA and secret scanning deal. I told her our tool is better for secrets but she wants me to do a formal comparison.
+
+Sarah: I'd be happy to help with that comparison. Our detection accuracy is significantly higher than bundled solutions.
+
+Sandra: I know, and I'll make that case. Just wanted you to know it's on the radar. Not a big deal - just standard budget season activity.
+
+Sarah: Appreciate the heads up. Let me send you updated competitive data.
+
+Sandra: Thanks Sarah. Overall though, we're very happy. Planning to renew in April.

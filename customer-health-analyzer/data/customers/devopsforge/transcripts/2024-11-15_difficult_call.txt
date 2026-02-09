@@ -1,0 +1,20 @@
+Call Transcript - Account Review
+Date: 2024-11-15
+Participants: Ryan Peters (DevOpsForge - CTO), David Chen (CSM)
+Duration: 15 minutes
+
+David: Ryan, I noticed your usage has dropped significantly. What's going on?
+
+Ryan: David, I'll be direct. The tool isn't meeting our needs. We have a Kubernetes-heavy infrastructure and the scanning just doesn't handle our deployment patterns well. Every helm chart triggers false positives.
+
+David: We've made significant improvements to Kubernetes support-
+
+Ryan: I've heard that before. We've also been dealing with support response times that don't match what we were promised. Our last critical ticket took 3 days to resolve. That's not acceptable for a security tool.
+
+David: I understand your frustration. Can I schedule a technical deep-dive?
+
+Ryan: We're past that point, David. We've been running a competing tool in parallel for the last two months. It handles our use case better out of the box.
+
+David: Is there anything I can do to change your mind?
+
+Ryan: At this point, probably not. Our renewal is in March and we've already budgeted for the alternative. Nothing personal.

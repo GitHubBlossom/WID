@@ -1,0 +1,10 @@
+Slack Channel: #secureops-support
+Date: 2025-01-05
+
+[10:00 AM] Marcus Johnson: Hey team, is there a way to set up automated weekly scan reports?
+
+[10:08 AM] Emily Chen: Hi Marcus! You can use our API to pull scan data and create scheduled reports. Want me to share a script template?
+
+[10:10 AM] Marcus Johnson: That would be great, thanks.
+
+[10:20 AM] Marcus Johnson: Perfect. I'll set this up today. Thanks!

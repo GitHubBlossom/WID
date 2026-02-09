@@ -1,0 +1,20 @@
+Support Ticket #4892
+Date: 2025-01-05
+Customer: Acme Corp
+Contact: Lisa Wang
+Priority: Medium
+Subject: Need Export of All Scanning Configuration
+
+Description:
+Please provide a complete export of our current scanning configuration, custom rules, and integration settings. We need this for our vendor evaluation documentation.
+
+---
+Support Response (2025-01-05, 4 hours later):
+Hi Lisa, I've generated a full configuration export for your account. You can download it from your admin panel under Settings > Export Configuration.
+
+---
+Customer Response (2025-01-06):
+Got it. Thanks.
+
+Status: Resolved
+Customer Satisfaction: Not provided

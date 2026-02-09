@@ -1,0 +1,13 @@
+From: James Morton <james.morton@dataflow.io>
+To: Nina Patel <nina.patel@company.com>
+Date: 2025-01-10
+Subject: Enterprise Tier Info Request
+
+Nina,
+
+Can you send over enterprise tier pricing for 40 seats, SOC2 compliance feature details, and dedicated support SLA terms?
+
+Maria wants to include this in our Q1 budget proposal. Timeline is tight - budget meeting is January 30th.
+
+Thanks!
+James

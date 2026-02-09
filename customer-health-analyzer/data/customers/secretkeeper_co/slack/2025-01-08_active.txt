@@ -1,0 +1,8 @@
+Slack Channel: #secretkeeper-support
+Date: 2025-01-08
+
+[11:00 AM] Emma Davis: Hey! Quick question - can we integrate scan results with our Linear project tracker?
+
+[11:05 AM] Rachel Kim: Not natively yet, but our webhook can push to Linear's API. Here's a community integration guide.
+
+[11:10 AM] Emma Davis: Ooh perfect! Setting this up now. You guys think of everything.

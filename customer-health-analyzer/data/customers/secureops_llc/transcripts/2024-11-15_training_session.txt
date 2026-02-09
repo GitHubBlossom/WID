@@ -1,0 +1,20 @@
+Call Transcript - Team Training Session
+Date: 2024-11-15
+Participants: Marcus Johnson (SecureOps - DevOps Lead), Emily Chen (CSM), Tom Reeves (Solutions Architect)
+Duration: 60 minutes
+
+Emily: Thanks everyone for joining. Now that the integration issues are resolved, Tom is going to walk your team through best practices for monorepo scanning.
+
+Tom: Hey team. I know you've had a rough start so I want to make sure we set you up for success.
+
+Marcus: Appreciate it Tom. The fix you deployed last week has been stable. Scans are completing in 3 minutes now instead of timing out.
+
+Tom: Great. Let me show you the incremental scanning feature - it only scans changed files on PR pushes, which is perfect for monorepos.
+
+[Technical training discussion for 40 minutes]
+
+Marcus: Okay, I have to admit - now that it's configured properly, this is actually really useful. We found 8 exposed secrets in the last week alone.
+
+Emily: That's a great start. How's the team feeling?
+
+Marcus: Cautiously optimistic. The frustration from October is still fresh, but people are starting to see the value. Let's see how the next month goes.

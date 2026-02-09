@@ -1,0 +1,14 @@
+Slack Channel: #techstart-support
+Date: 2025-01-12
+
+[2:00 PM] Priya Patel: Hey team! Saw the new custom pattern feature in the changelog. Is there a limit on how many custom patterns we can define?
+
+[2:03 PM] Rachel Kim: Hi Priya! No hard limit, but we recommend keeping it under 50 for optimal scan performance. Most teams use 10-20.
+
+[2:05 PM] Priya Patel: Perfect. We'll probably need about 15. Can patterns be shared across repos or are they repo-specific?
+
+[2:07 PM] Rachel Kim: They can be defined at the org level and inherited by all repos. You can also override at the repo level if needed.
+
+[2:08 PM] Priya Patel: That's great design. We'll set up org-level patterns for our internal credential formats. Thanks!
+
+[2:10 PM] Alex Rivera: Priya's going to have those patterns set up before end of day knowing her 😄

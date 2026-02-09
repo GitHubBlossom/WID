@@ -1,0 +1,20 @@
+Support Ticket #4870
+Date: 2025-01-05
+Customer: CodeSentry LLC
+Contact: Dan Kim
+Priority: Low
+Subject: API Documentation Question
+
+Description:
+Need updated API docs for the v3 endpoints. Building an internal integration.
+
+---
+Support Response (2025-01-05, 30 minutes later):
+Here's the v3 API documentation. Let me know if you need any help.
+
+---
+Customer Response (2025-01-05):
+Perfect, thanks!
+
+Status: Resolved
+Customer Satisfaction: Satisfied

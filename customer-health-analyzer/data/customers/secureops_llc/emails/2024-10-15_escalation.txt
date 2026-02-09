@@ -1,0 +1,12 @@
+From: Marcus Johnson <marcus.j@secureops.com>
+To: Emily Chen <emily.chen@company.com>
+Date: 2024-10-15
+Subject: URGENT - Pipeline Still Broken
+
+Emily,
+
+It's been a week since our call and the pipeline is still broken. The workaround your engineer suggested caused a different error. I've attached the logs.
+
+My manager wants a call with your engineering leadership by end of week or we need to discuss alternatives. This is not sustainable.
+
+Marcus

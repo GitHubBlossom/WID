@@ -1,0 +1,14 @@
+From: Alex Rivera <alex@techstart.io>
+To: Rachel Kim <rachel.kim@company.com>
+Date: 2024-11-05
+Subject: Quick Kudos
+
+Hey Rachel,
+
+Just wanted to drop a quick note. We had a security audit last week and the auditors were impressed with our secret management practices. They specifically called out our pre-commit scanning workflow as a best practice.
+
+That's a direct result of implementing your platform. Made us look really good.
+
+Thanks for all the support getting us set up!
+
+Alex

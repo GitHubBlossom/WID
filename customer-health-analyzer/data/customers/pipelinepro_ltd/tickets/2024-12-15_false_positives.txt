@@ -1,0 +1,20 @@
+Support Ticket #4740
+Date: 2024-12-15
+Customer: PipelinePro Ltd
+Contact: Chris Taylor
+Priority: High
+Subject: Excessive False Positives in Java Repos
+
+Description:
+Getting 30+ false positives per scan on our Java microservices. Most are base64 encoded config values, not secrets. This is making the tool unusable.
+
+---
+Support Response (2024-12-15, 2 hours later):
+We've created custom exclusion patterns for common Java base64 configs. Please update your config.
+
+---
+Customer Response (2024-12-16):
+Helped somewhat but still too many false flags. Need more improvement.
+
+Status: Partially Resolved
+Customer Satisfaction: Dissatisfied

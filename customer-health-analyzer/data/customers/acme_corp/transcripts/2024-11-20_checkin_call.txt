@@ -1,0 +1,28 @@
+Call Transcript - Monthly Check-in
+Date: 2024-11-20
+Participants: Sarah Chen (Acme Corp - Head of Security), Mike Johnson (CSM)
+Duration: 30 minutes
+
+Mike: Hey Sarah, how's everything going since our QBR?
+
+Sarah: Hey Mike. Things are... okay. We've been dealing with some internal reorganization. David's team got restructured and there's been some confusion about who owns what in the security tooling space.
+
+Mike: Oh, that's a big change. Is your reporting structure affected?
+
+Sarah: Not directly, but there's a new VP of Platform Engineering who's doing a review of all our developer tools. Standard stuff when new leadership comes in - they want to put their stamp on things.
+
+Mike: Makes sense. Is there anything I can do to help make the case?
+
+Sarah: Actually, could you send me an updated comparison sheet? The new VP asked the team to document what tools we're using and what alternatives exist. I think she just wants to understand the landscape. I mentioned we're happy with the product but she wants to see it written down.
+
+Mike: Of course. I'll put together a competitive comparison. Who are they looking at specifically?
+
+Sarah: She mentioned Snyk has a secret scanning feature now, and someone on the team brought up GitGuardian. Honestly, I think it's just due diligence but I want to be prepared.
+
+Mike: Understood. I'll get you a thorough comparison by end of week. Anything else on your mind?
+
+Sarah: The false positive thing is still bugging us. We applied the config changes you suggested but it only improved maybe 5%. The Python team is getting vocal about it.
+
+Mike: Let me escalate that to our engineering team. We can do a custom rule tuning session.
+
+Sarah: Yeah, let's do that. Thanks Mike.

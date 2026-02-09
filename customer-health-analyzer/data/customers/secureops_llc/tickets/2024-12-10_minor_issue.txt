@@ -1,0 +1,20 @@
+Support Ticket #4720
+Date: 2024-12-10
+Customer: SecureOps LLC
+Contact: Marcus Johnson
+Priority: Low
+Subject: Notification Preferences Configuration
+
+Description:
+How do I configure notification preferences per-repo?
+
+---
+Support Response (2024-12-10, 45 minutes later):
+Hi Marcus! You can configure per-repo notification rules under Settings > Notifications > Rules.
+
+---
+Customer Response (2024-12-10):
+Got it configured. Works great. Thanks for the quick response - night and day from October!
+
+Status: Resolved
+Customer Satisfaction: Satisfied

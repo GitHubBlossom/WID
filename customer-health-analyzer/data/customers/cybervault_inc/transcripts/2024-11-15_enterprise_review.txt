@@ -1,0 +1,16 @@
+Call Transcript - Enterprise Account Review
+Date: 2024-11-15
+Participants: Patricia Hall (CyberVault - VP Engineering), Emily Chen (CSM)
+Duration: 30 minutes
+
+Emily: Patricia, thanks for the time. How's the enterprise rollout going?
+
+Patricia: Emily, it's been mixed. The core scanning works well and the team is getting value from it. But with 200 developers, we keep hitting edge cases. Different teams have different workflows and configurations.
+
+Emily: That's common with large enterprises. What specific challenges are you seeing?
+
+Patricia: The biggest is consistency across teams. Some teams have perfect adoption, others barely use it. And the admin dashboard doesn't give me the visibility I need to track adoption by team.
+
+Emily: We're releasing team-level analytics next quarter. In the meantime, I can pull custom reports for you.
+
+Patricia: That would help. Despite the challenges, the tool has proven its value. We renewed early because the security team loves it. Just need to get the last 30% of teams fully onboarded.

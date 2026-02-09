@@ -1,0 +1,18 @@
+Slack Channel: #techstart-support
+Date: 2024-11-15
+
+[10:00 AM] Priya Patel: Morning! Quick question - what's the recommended approach for scanning Docker secrets? We're containerizing everything and want to make sure we're covered.
+
+[10:05 AM] Rachel Kim: Great question Priya! We have a Docker-specific scanning mode. Let me share the docs.
+
+[10:06 AM] Rachel Kim: Here's the guide: [link]. Key thing is to add the docker scanning step before your image push.
+
+[10:08 AM] Priya Patel: Perfect timing - we're setting up the new pipeline today. This is exactly what I needed.
+
+[10:30 AM] Priya Patel: Got it working! Found 2 secrets in our Dockerfiles already. One was a test DB password that shouldn't have been there. 
+
+[10:32 AM] Rachel Kim: That's the value right there! Nice catch.
+
+[10:33 AM] Alex Rivera: Great work Priya. Rachel, your team's documentation is seriously top-notch. Makes these integrations so much easier.
+
+[10:35 AM] Rachel Kim: Thanks Alex! We put a lot of effort into the docs. Glad it shows. 😊

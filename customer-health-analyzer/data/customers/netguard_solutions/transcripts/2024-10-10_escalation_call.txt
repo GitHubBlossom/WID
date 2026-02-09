@@ -1,0 +1,20 @@
+Call Transcript - Escalation Call
+Date: 2024-10-10
+Participants: Robert Kim (NetGuard - VP Security), David Chen (CSM)
+Duration: 20 minutes
+
+David: Robert, thanks for making time. I wanted to address the support issues your team has been experiencing.
+
+Robert: David, I'll be brief. We've had 11 support tickets in the last month. My team is spending more time troubleshooting your product than using it.
+
+David: I understand the frustration. Can you help me prioritize which issues are most impactful?
+
+Robert: The scanning pipeline keeps crashing on our infrastructure repos. We have complex Terraform configurations and your scanner can't handle them. Half the time it flags environment variable references as secrets.
+
+David: We've been investing in Terraform support-
+
+Robert: I've heard that before. What I need is a technical resource dedicated to our account for the next two weeks. Otherwise I need to start looking at alternatives. Our procurement team has already started gathering information on GitGuardian.
+
+David: I can arrange a dedicated solutions architect. Let me set that up today.
+
+Robert: Fine. End of week.

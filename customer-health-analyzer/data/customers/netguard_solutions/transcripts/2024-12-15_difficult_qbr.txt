@@ -1,0 +1,16 @@
+Call Transcript - Quarterly Business Review
+Date: 2024-12-15
+Participants: Robert Kim (NetGuard - VP Security), David Chen (CSM)
+Duration: 15 minutes
+
+David: Robert, thanks for joining the QBR.
+
+Robert: Let's make this quick. I have another meeting in 20 minutes.
+
+David: Your scan success rate has improved from 60% to 85%.
+
+Robert: 85% isn't where it needs to be. We're still getting false positives on Terraform files. And honestly, the damage is done with my team. We've been evaluating GitGuardian for the past month. Their Terraform support seems more mature.
+
+David: I'd love the chance to do a head-to-head comparison.
+
+Robert: We'll see. My team is running parallel evaluations through January. I'll make a decision before our March renewal. I'm not going to commit to anything right now.

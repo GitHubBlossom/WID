@@ -1,0 +1,11 @@
+customer_name,date,csm_name,manual_sentiment_score,confidence_level,reasoning,override_flag
+Acme Corp,2025-01-20,Sarah Mitchell,3.0,high,"Exec mentioned budget cuts in off-record conversation. Body language in video calls shows increasing discomfort. LinkedIn activity suggests job searching.",true
+TechStart Inc,2025-01-18,James Rodriguez,8.5,medium,"Relationship feels solid in calls. Team is engaged and asking good questions. No concerns detected.",false
+SecureOps LLC,2025-01-15,Sarah Mitchell,5.0,medium,"Customer always complains but historically renews. Recent training improved engagement noticeably.",false
+DataFlow Systems,2025-01-22,James Rodriguez,7.5,medium,"Good momentum after recent onboarding. Team actively adopting new features.",false
+NetGuard Solutions,2025-01-10,Emily Chen,2.0,high,"VP Security told me privately they are switching to GitGuardian. Decision already made internally.",true
+CyberVault Inc,2025-01-19,Emily Chen,8.0,low,"Large enterprise moves slowly. Relationship seems fine but hard to read internal politics.",false
+DevShield IO,2025-01-21,Sarah Mitchell,5.5,high,"Heard from partner channel that customer is consolidating vendors. CFO driving cost cuts across all departments.",true
+PipelinePro Ltd,2025-01-17,James Rodriguez,4.5,medium,"Team frustrated with false positives. Manager expressed concern about ROI in private sidebar.",false
+CodeSentry LLC,2025-01-23,Emily Chen,6.5,medium,"Some competitive evaluation happening but customer seems to prefer our solution. Need to watch closely.",false
+InfraWatch Inc,2025-01-12,Sarah Mitchell,3.5,high,"Infrastructure team is being reorganized. New VP may re-evaluate all security tooling. High uncertainty.",true

@@ -1,0 +1,20 @@
+Call Transcript - Account Recovery Discussion
+Date: 2024-10-18
+Participants: James Morton (DataFlow - Engineering Manager), Nina Patel (CSM)
+Duration: 30 minutes
+
+Nina: James, thanks for hopping on. I know things got off to a rocky start.
+
+James: Hey Nina. Yeah, the first month was rough. The integration with our Kubernetes pipeline was more complex than expected. But since the training session, things have turned around significantly.
+
+Nina: What made the biggest difference?
+
+James: Understanding the webhook configuration was the game changer. Once we got that right, scans started running smoothly. The team went from wanting to rip it out to actually requesting it in new projects.
+
+Nina: That's a big turnaround. Are you seeing the value?
+
+James: Absolutely. We found a leaked MongoDB connection string last week that had been sitting in a config file for months. That's the kind of thing that keeps me up at night.
+
+Nina: Any remaining friction points?
+
+James: Scan times are a bit long for larger repos. But overall, I'm much more optimistic than two months ago.

@@ -1,0 +1,20 @@
+Call Transcript - Monthly Check-in
+Date: 2025-01-12
+Participants: Emma Davis (SecretKeeper - Lead Engineer), Rachel Kim (CSM)
+Duration: 20 minutes
+
+Rachel: Emma, how's your team doing?
+
+Emma: Great, Rachel! We just onboarded two new developers and they were impressed with how easy the scanning setup was. One of them said it was the best security tool onboarding they've experienced.
+
+Rachel: That's wonderful feedback! How's the detection going?
+
+Emma: We found and fixed 7 secrets last month. The pre-commit hooks are working perfectly. Our CTO is really happy with the visibility.
+
+Rachel: Any requests?
+
+Emma: We'd love to see a team leaderboard feature - gamify security so developers compete on fastest remediation time. Would make it fun!
+
+Rachel: Love that idea! I'll pass it to the product team.
+
+Emma: Thanks Rachel. We're a small team but this tool punches above its weight for us. Saved us hours every week on manual code reviews.

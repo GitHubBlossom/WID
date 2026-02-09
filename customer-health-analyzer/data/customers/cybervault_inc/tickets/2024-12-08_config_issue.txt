@@ -1,0 +1,20 @@
+Support Ticket #4710
+Date: 2024-12-08
+Customer: CyberVault Inc
+Contact: DevOps Team
+Priority: Medium
+Subject: SSO Integration Intermittent Failures
+
+Description:
+SSO login failing intermittently for about 10% of users. Need this resolved for our enterprise rollout.
+
+---
+Support Response (2024-12-08, 1 hour later):
+Identified a timeout issue with SAML assertion validation. Deployed fix.
+
+---
+Customer Response (2024-12-09):
+Confirmed working for all users now. Thanks for the quick turnaround.
+
+Status: Resolved
+Customer Satisfaction: Satisfied

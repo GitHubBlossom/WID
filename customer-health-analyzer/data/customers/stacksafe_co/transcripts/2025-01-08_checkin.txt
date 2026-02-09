@@ -1,0 +1,16 @@
+Call Transcript - Monthly Check-in
+Date: 2025-01-08
+Participants: Derek Smith (StackSafe - Lead Developer), Rachel Kim (CSM)
+Duration: 20 minutes
+
+Rachel: Derek, how's the start of the new year?
+
+Derek: Good, Rachel. We've been steady. Scanning is part of our workflow now and we're catching about 3-4 secrets per month. Not a huge volume but each one is important.
+
+Rachel: Any concerns or requests?
+
+Derek: We're a small team so we don't need much. The product does what we need. Only request would be better pricing for small teams - $25K is a decent chunk of our budget.
+
+Rachel: I understand. Let me see what options we have for your tier.
+
+Derek: Appreciate it. Otherwise, no complaints. It just works.

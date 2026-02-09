@@ -1,0 +1,24 @@
+Call Transcript - Support Escalation Call
+Date: 2024-10-08
+Participants: Marcus Johnson (SecureOps - DevOps Lead), Emily Chen (CSM)
+Duration: 25 minutes
+
+Emily: Marcus, thanks for getting on the call. I saw the support tickets and wanted to check in directly.
+
+Marcus: Emily, I'm going to be honest - the team is really frustrated right now. We've been trying to get the GitLab integration working for three weeks and it keeps breaking. Builds are failing, developers are bypassing the scanning step entirely, and my manager is asking why we bought this tool.
+
+Emily: I hear you, and I'm sorry about the experience. Can you walk me through what's happening specifically?
+
+Marcus: Every time we push to our main branch, the scan step hangs for about 15 minutes and then times out. It's blocking our entire deployment pipeline. We tried the workarounds in the docs but nothing works.
+
+Emily: That sounds like the large repo timeout issue. How big is your main repo?
+
+Marcus: About 50,000 files. It's a monorepo.
+
+Emily: Okay, I'm going to escalate this to our engineering team today. For monorepos that size, there's a specific configuration that's not well documented. I should have flagged this during onboarding and I apologize for that.
+
+Marcus: Yeah, fine. I just need it fixed. My team is losing confidence in the tool and I'm running out of political capital defending it.
+
+Emily: Completely understand. I'll have our senior engineer reach out within 24 hours with a solution. Can I also schedule a training session once we get the technical issues resolved?
+
+Marcus: Let's get it working first. Then we can talk about training.

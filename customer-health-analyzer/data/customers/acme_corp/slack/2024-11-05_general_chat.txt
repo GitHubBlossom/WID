@@ -1,0 +1,22 @@
+Slack Channel: #acme-corp-support
+Date: 2024-11-05
+
+[9:15 AM] Sarah Chen: Hey team, quick question - is there a way to export the scanning results to our SIEM? We're trying to centralize all security event data.
+
+[9:22 AM] Support Bot: Hi Sarah! Yes, we have a SIEM integration guide. Let me pull that up for you.
+
+[9:23 AM] Mike Johnson: Hey Sarah! Great question. We support Splunk, Datadog, and generic webhook integrations. Which SIEM are you using?
+
+[9:25 AM] Sarah Chen: We're on Splunk. That's perfect!
+
+[9:26 AM] Mike Johnson: Here's the integration doc: [link]. Let me know if you need help setting it up. Most customers get it running in about an hour.
+
+[9:30 AM] Sarah Chen: Awesome, this looks straightforward. Lisa will set it up this week. Thanks for the quick response! 🙌
+
+[9:31 AM] Mike Johnson: Happy to help! Let us know how it goes.
+
+[10:15 AM] Sarah Chen: One more thing - can we get additional API rate limits? We're hitting the cap during our nightly full-repo scans.
+
+[10:18 AM] Mike Johnson: Absolutely. I'll put in the request today. Should be updated within 24 hours.
+
+[10:19 AM] Sarah Chen: You guys are always responsive. Appreciate it.

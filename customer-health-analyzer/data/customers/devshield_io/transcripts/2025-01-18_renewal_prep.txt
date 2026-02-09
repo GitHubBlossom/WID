@@ -1,0 +1,24 @@
+Call Transcript - Renewal Preparation
+Date: 2025-01-18
+Participants: Kevin Walsh (DevShield - Director of Engineering), Sarah Mitchell (CSM)
+Duration: 20 minutes
+
+Sarah: Kevin, wanted to check in ahead of your April renewal.
+
+Kevin: Hey Sarah. So the vendor consolidation thing is still in play. The CFO has narrowed it down to two scenarios: keep our current stack or move to Snyk's platform for SCA plus secret scanning.
+
+Sarah: What's the team's preference?
+
+Kevin: Engineering prefers your tool for secret scanning - it's clearly better. But the CFO sees a 30% cost reduction by consolidating. It's a business decision at this point, not a technical one.
+
+Sarah: Would it help if I could offer pricing that makes the consolidation argument less compelling?
+
+Kevin: It might. Can you get creative with the pricing? Maybe a multi-year deal? I need something to take to the CFO that makes the numbers work.
+
+Sarah: Let me work on some options. When's the decision deadline?
+
+Kevin: She wants final recommendations by end of February. The April renewal is the deadline.
+
+Sarah: I'll have a proposal to you by end of this week.
+
+Kevin: Thanks Sarah. I'm rooting for you but I can't promise anything.

@@ -1,0 +1,32 @@
+Call Transcript - Technical Review
+Date: 2024-12-18
+Participants: Sarah Chen (Acme Corp - Head of Security), Lisa Wang (Acme Corp - Senior DevOps), Mike Johnson (CSM), Tom Reeves (Solutions Architect)
+Duration: 40 minutes
+
+Mike: Thanks everyone for joining. Tom's here to help with the false positive tuning Sarah mentioned.
+
+Sarah: Thanks for setting this up. Lisa's been dealing with most of the day-to-day issues so I wanted her here.
+
+Lisa: Yeah, so the main problem is our Python monorepo. We're getting flagged on test fixtures, mock credentials, and even some base64 encoded config values that aren't actually secrets.
+
+Tom: Got it. Let me share my screen. I can walk through some advanced regex exclusion patterns that should help.
+
+[Technical discussion for 20 minutes about configuration tuning]
+
+Lisa: Okay, that looks much better. If this actually cuts false positives by 70% like you're saying, that'll make a big difference.
+
+Sarah: Good. Hey Mike, unrelated question - do you know if there's any flexibility on pricing? Our CFO is doing a vendor consolidation exercise and asked me to check on all our security tool contracts.
+
+Mike: I can definitely look into what options we have. What's the timeline on the vendor review?
+
+Sarah: She wants recommendations by end of February. We're looking at consolidating where we can. Nothing personal - it's happening across all departments.
+
+Mike: Totally understand. Let me talk to my team about what we can offer. When does your current contract come up?
+
+Sarah: April 15th. So we have some time but the CFO wants decisions made well before renewal dates.
+
+Mike: Got it. I'll come back with some options. Tom, anything else on the technical side?
+
+Tom: I think we're good. Lisa, try those patterns and let me know how the numbers look after a week.
+
+Lisa: Will do. Thanks Tom.

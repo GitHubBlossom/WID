@@ -1,0 +1,14 @@
+From: James Morton <james.morton@dataflow.io>
+To: Nina Patel <nina.patel@company.com>
+Date: 2024-11-10
+Subject: Performance Tuning Results
+
+Nina,
+
+Applied the performance settings you recommended. Scan times dropped from 8 minutes to about 5 minutes. The team is noticing and appreciating the improvement.
+
+Also found and fixed 6 exposed secrets this week. Two were production database credentials. Scary but glad we caught them.
+
+Thanks for the continued support. Big difference from where we were a month ago.
+
+James

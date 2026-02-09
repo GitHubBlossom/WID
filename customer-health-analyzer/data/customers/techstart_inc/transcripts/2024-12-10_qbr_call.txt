@@ -1,0 +1,30 @@
+Call Transcript - Quarterly Business Review
+Date: 2024-12-10
+Participants: Alex Rivera (TechStart - CTO), Rachel Kim (CSM)
+Duration: 40 minutes
+
+Rachel: Alex, welcome to our Q4 review. Let me share some numbers.
+
+Alex: Hit me with the stats.
+
+Rachel: So this quarter, your team ran 2,100 scans, found 24 real secrets, and fixed all 24 within an average of 2 hours. That's a 100% remediation rate. Pretty impressive.
+
+Alex: That's what I like to hear. The team has really internalized the workflow. Our security posture is night and day compared to six months ago.
+
+Rachel: Your feature adoption is also top-tier. You're using 9 out of 10 available features. The only one you haven't enabled is the Jira integration.
+
+Alex: Oh, we actually just switched to Linear. Any plans to support that?
+
+Rachel: It's on the roadmap for Q2. I'll flag your interest to the product team.
+
+Alex: Perfect. Hey, I wanted to mention - we presented our security improvements at a board meeting last week. The board was really impressed with the secret detection metrics. Our CISO used the term "proactive security posture" which is basically the holy grail phrase.
+
+Rachel: That's amazing. Would you be interested in doing a case study? Other CTOs would love to hear that story.
+
+Alex: Yeah, I'd be open to that. Let's talk about it after the holidays.
+
+Rachel: Wonderful. Anything else you need from us?
+
+Alex: Honestly, just keep doing what you're doing. The product is solid, the support is responsive, and the value is clear. We're planning to renew early if that's an option.
+
+Rachel: Music to my ears. I'll send over early renewal options this week.

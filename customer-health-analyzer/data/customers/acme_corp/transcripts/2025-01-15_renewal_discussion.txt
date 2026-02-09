@@ -1,0 +1,28 @@
+Call Transcript - Renewal Discussion
+Date: 2025-01-15
+Participants: Sarah Chen (Acme Corp - Head of Security), Mike Johnson (CSM)
+Duration: 25 minutes
+
+Mike: Hi Sarah, thanks for making time. I wanted to follow up on the renewal conversation and share some pricing options.
+
+Sarah: Hey Mike. Yeah, about that. So I'll be straight with you - we're in active evaluation mode right now. The new VP has narrowed it down to three options and we're one of them.
+
+Mike: I appreciate the transparency. Can you share what the evaluation criteria are?
+
+Sarah: It's mostly about cost and consolidation. GitGuardian came in with a pretty aggressive quote, and Snyk is bundling their secret scanning with their SCA tool which we also need. The value prop of a bundled solution is hard to ignore from a budget perspective.
+
+Mike: I understand. What would keep us in the running?
+
+Sarah: Honestly? I need to show clear differentiation. The detection accuracy is good when it works, but the false positive issue hasn't fully gone away. And the pricing needs to be competitive. The CFO is looking at hard numbers.
+
+Mike: Can I set up a meeting with your VP? I'd like to present our full value proposition including the incident prevention data.
+
+Sarah: I'll ask. She's pretty busy with the review but I'll see if I can get 30 minutes on her calendar. No promises.
+
+Mike: That's all I ask. And I'll have the updated pricing proposal to you by Friday.
+
+Sarah: Sounds good. Look, Mike, you've been great to work with. This isn't about the relationship. It's a business decision that's being made above my pay grade.
+
+Mike: I totally get it. We'll put our best foot forward.
+
+Sarah: Cool. Talk soon.

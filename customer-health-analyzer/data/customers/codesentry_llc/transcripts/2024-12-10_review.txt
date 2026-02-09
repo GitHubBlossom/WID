@@ -1,0 +1,20 @@
+Call Transcript - Account Review
+Date: 2024-12-10
+Participants: Dan Kim (CodeSentry - Security Director), Emily Chen (CSM)
+Duration: 25 minutes
+
+Emily: Dan, how are things going?
+
+Dan: Emily, the product is performing well. Detection accuracy is good and the team has integrated it smoothly. We're getting real value from it.
+
+Emily: Great to hear. Any concerns?
+
+Dan: One thing - our parent company is standardizing security tools across all subsidiaries. They've been looking at Snyk as a company-wide platform. If they mandate Snyk, we'd have to switch regardless of our preference.
+
+Emily: Is there a timeline on that decision?
+
+Dan: They're evaluating through Q1. Decision expected in February. I've advocated for keeping our current setup but it's a corporate-level decision. The bundling economics of Snyk across 12 subsidiaries is hard to argue against.
+
+Emily: I understand. Would it help if I could present to the parent company's security team?
+
+Dan: I'll try to arrange it but no guarantees. Corporate moves slowly on these things.

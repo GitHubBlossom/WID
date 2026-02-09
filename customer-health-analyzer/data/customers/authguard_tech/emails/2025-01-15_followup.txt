@@ -1,0 +1,12 @@
+From: Mike Chang <mike.chang@authguard.tech>
+To: Emily Chen <emily.chen@company.com>
+Date: 2025-01-15
+Subject: Training Session Feedback
+
+Emily,
+
+Training was good. Team learned a lot about the advanced configuration options. Should reduce our support tickets going forward.
+
+One concern - we noticed scan times increasing as our repo grows. Currently at 5 minutes per scan. Is that expected for a 20K file repo?
+
+Mike

@@ -1,0 +1,28 @@
+Support Ticket #4521
+Date: 2024-11-12
+Customer: Acme Corp
+Contact: Lisa Wang
+Priority: High
+Subject: CI/CD Pipeline Integration Failing After Update
+
+Description:
+After updating to v2.3.1, our GitHub Actions workflow is failing on the secret scanning step. Getting timeout errors after 10 minutes. This is blocking our deployments.
+
+Error: "Scan timeout exceeded. Process killed after 600s"
+
+This is urgent - we have a production release scheduled for tomorrow.
+
+---
+Support Response (2024-11-12, 2 hours later):
+Hi Lisa, we've identified this as a known issue with large monorepos on v2.3.1. A hotfix is being deployed now. In the meantime, you can add --timeout=1200 to your scan command as a workaround.
+
+---
+Customer Response (2024-11-12):
+Workaround helped, thanks. But this shouldn't have shipped with this bug. We rely on this for every deployment. Please make sure regression testing catches these before release.
+
+---
+Resolution (2024-11-13):
+Hotfix v2.3.2 deployed. Root cause was inefficient file traversal in repos with >10K files. Added performance regression tests to our CI pipeline.
+
+Status: Resolved
+Customer Satisfaction: Neutral - appreciated quick fix but concerned about QA process

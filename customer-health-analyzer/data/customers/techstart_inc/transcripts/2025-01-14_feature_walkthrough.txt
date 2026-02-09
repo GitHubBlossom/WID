@@ -1,0 +1,26 @@
+Call Transcript - New Feature Walkthrough
+Date: 2025-01-14
+Participants: Alex Rivera (TechStart - CTO), Priya Patel (TechStart - Senior Engineer), Rachel Kim (CSM)
+Duration: 30 minutes
+
+Rachel: Thanks for joining, both of you. I wanted to walk through our new advanced pattern detection that launched last week.
+
+Alex: Priya's been excited about this one. She's our secret scanning champion.
+
+Priya: Guilty as charged. I read the release notes and immediately wanted to try the custom regex patterns. We have some internal credential formats that aren't standard.
+
+Rachel: Perfect use case. Let me share my screen and show you how to set those up.
+
+[15 minutes of feature walkthrough]
+
+Priya: This is exactly what we needed. I can define patterns for our internal API gateway tokens now. Those have a specific prefix format.
+
+Alex: Great feature. How many other customers are using this?
+
+Rachel: It's been one of our most requested features. About 30% of customers have enabled it in the first week.
+
+Priya: Can we also use this to create custom severity levels? Like, our database credentials should always be critical but third-party test API keys could be low severity.
+
+Rachel: Absolutely. Let me show you the severity override configuration.
+
+Alex: This is why we stick with you guys. The product keeps getting better and the support is always there.

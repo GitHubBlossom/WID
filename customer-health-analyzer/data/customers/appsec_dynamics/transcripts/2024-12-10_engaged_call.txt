@@ -1,0 +1,20 @@
+Call Transcript - Feature Review
+Date: 2024-12-10
+Participants: Tom Rogers (AppSec - CISO), Nina Patel (CSM)
+Duration: 35 minutes
+
+Nina: Tom, excited to show you the new features this quarter.
+
+Tom: Nina, I've been looking forward to this. Your product has become a cornerstone of our security program. We've prevented 12 potential incidents this quarter using the scanning workflow.
+
+Nina: That's outstanding. What's been the biggest impact?
+
+Tom: The pre-commit scanning. We caught a junior developer about to push production AWS credentials. Would have been a nightmare. The ROI is crystal clear - this tool pays for itself every month.
+
+Nina: Any feature requests for next quarter?
+
+Tom: Better compliance reporting would be great. We're going through SOC2 and ISO27001 simultaneously. Also, our board asked for a security posture dashboard and your tool's metrics would be perfect for that.
+
+Nina: Both are on our roadmap. Let me get you into the beta program.
+
+Tom: Perfect. And Nina, I've been recommending your tool to every CISO I know. You guys are doing great work.

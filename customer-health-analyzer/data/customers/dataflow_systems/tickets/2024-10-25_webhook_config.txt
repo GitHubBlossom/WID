@@ -1,0 +1,20 @@
+Support Ticket #4475
+Date: 2024-10-25
+Customer: DataFlow Systems
+Contact: James Morton
+Priority: High
+Subject: Webhook Notifications Not Triggering
+
+Description:
+Webhook notifications to Slack not firing. Scans complete but no notifications sent.
+
+---
+Support Response (2024-10-25, 1 hour later):
+Hi James, the webhook URL needs the /api/v1/scan-events endpoint suffix.
+
+---
+Customer Response (2024-10-25):
+That was it! Would be helpful to have this more clearly documented. But thanks for the quick fix!
+
+Status: Resolved
+Customer Satisfaction: Satisfied

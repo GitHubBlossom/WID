@@ -1,0 +1,12 @@
+Slack Channel: #netguard-support
+Date: 2024-10-12
+
+[9:00 AM] DevOps Lead (NetGuard): Another false positive on our Terraform modules. It flagged ${var.database_password} as an exposed secret. That's a VARIABLE REFERENCE, not a secret.
+
+[9:15 AM] Support Engineer: Hi, we recognize this is a known limitation with our Terraform parsing.
+
+[9:22 AM] DevOps Lead (NetGuard): "Known limitation" and "working on it" is what we've been hearing for months. When is this actually going to be fixed?
+
+[9:45 AM] David Chen: I've escalated this internally. Let me help you set up ignore rules for common Terraform patterns.
+
+[9:50 AM] DevOps Lead (NetGuard): Fine. Send me the rules.

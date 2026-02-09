@@ -1,0 +1,12 @@
+From: Dan Kim <dan.kim@codesentry.com>
+To: Emily Chen <emily.chen@company.com>
+Date: 2025-01-12
+Subject: Corporate Decision Update
+
+Emily,
+
+Quick update - the parent company evaluation is still ongoing. Snyk is the frontrunner for the company-wide deal. I'm still pushing for us to keep our current setup but it's an uphill battle.
+
+Will keep you posted.
+
+Dan

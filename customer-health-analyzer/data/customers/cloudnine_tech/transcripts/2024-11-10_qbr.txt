@@ -1,0 +1,20 @@
+Call Transcript - Quarterly Business Review
+Date: 2024-11-10
+Participants: Lisa Park (CloudNine - Security Lead), Rachel Kim (CSM)
+Duration: 30 minutes
+
+Rachel: Lisa, great to connect for our Q4 review.
+
+Lisa: Hey Rachel! Things are going great. We hit 100% repo coverage last month. Every single repo in our org is now being scanned on every push.
+
+Rachel: That's incredible adoption. What's driving the enthusiasm?
+
+Lisa: Honestly, the pre-commit hooks changed everything. Developers catch secrets before they even commit. It's saved us from at least 10 potential incidents this quarter. The team loves this tool - it's become part of our DNA.
+
+Rachel: Any concerns or feature requests?
+
+Lisa: We'd love to see better Azure DevOps integration. We're migrating some projects there and want seamless coverage. But that's a nice-to-have, not a blocker.
+
+Rachel: It's on our roadmap. I'll flag your interest.
+
+Lisa: Perfect. Oh, and I wanted to mention - our CISO presented your tool at a security conference as a best practice. You might get some inbound leads from that!
