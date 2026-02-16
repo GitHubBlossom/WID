@@ -1,5 +1,5 @@
 """
-Productivity Analyzer - Web Application
+WhatIDid.ai - Your Week Summarized
 Analyzes Gmail, Calendar, and Drive activity to generate productivity summaries
 """
 
@@ -320,7 +320,7 @@ if __name__ == '__main__':
     schedule_weekly_summary()
     scheduler.start()
 
-    logger.info("Starting Productivity Analyzer web application...")
+    logger.info("Starting WhatIDid.ai web application...")
     logger.info("Access the app at http://localhost:5555")
 
     # Run Flask app

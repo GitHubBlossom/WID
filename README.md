@@ -1,4 +1,4 @@
-# Productivity Analyzer
+# WhatIDid.ai - Your Week Summarized
 
 An intelligent web application that automatically generates productivity summaries by analyzing your Gmail, Google Calendar, and Google Drive activity. Powered by AI (Anthropic Claude) to provide insightful summaries of your work.
 

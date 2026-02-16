@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Productivity Analyzer{% endblock %}</title>
+    <title>{% block title %}WhatIDid.ai - Your Week Summarized{% endblock %}</title>
     <style>
         * {
             margin: 0;
@@ -174,7 +174,10 @@
 <body>
     <header>
         <div class="container">
-            <h1>📊 Productivity Analyzer</h1>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <img src="{{ url_for('static', filename='img/logo-full.png') }}" alt="WhatIDid.ai" style="height: 50px;" onerror="this.style.display='none'">
+                <h1 style="margin: 0;">WhatIDid.ai</h1>
+            </div>
             <nav>
                 <a href="{{ url_for('index') }}">Dashboard</a>
                 <a href="{{ url_for('setup') }}">Settings</a>
@@ -197,7 +200,7 @@
     </div>
 
     <footer>
-        <p>Productivity Analyzer &copy; 2026 | Powered by Google APIs &amp; Claude AI</p>
+        <p>WhatIDid.ai &copy; 2026 | Your Week Summarized | Powered by Google APIs &amp; Claude AI</p>
     </footer>
 
     {% block extra_js %}{% endblock %}
