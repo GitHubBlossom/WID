@@ -1,26 +1,23 @@
 # Logo Images
 
-Place the WhatIDid.ai logo images in this directory:
+Place the WhatIDid.ai logo image in this directory:
 
-## Required Images
+## Required Image
 
-1. **logo-full.png** - Full logo with "WhatIDid.ai - Your Week Summarized" text
-   - Used in: Website header
-   - Recommended size: Height 50-100px, transparent background
-
-2. **logo-icon.png** - Beaver mascot icon (optional)
-   - Used in: Favicon, mobile icons
-   - Recommended size: 512x512px, transparent background
+**logo-icon.png** - Beaver mascot icon
+- Used in: Website header (large, prominent display)
+- Recommended size: 512x512px or higher, transparent background (PNG format)
+- The image will be displayed at 80x80px in the header
 
 ## Current Status
 
-⚠️ **Placeholder** - Please upload the actual logo images to this directory.
+⚠️ **Placeholder** - Please upload the beaver mascot logo to this directory as `logo-icon.png`.
 
 ## Usage
 
 The logo is referenced in the base template (`templates/base.html`) with:
 ```html
-<img src="{{ url_for('static', filename='img/logo-full.png') }}" alt="WhatIDid.ai" style="height: 50px;">
+<img src="{{ url_for('static', filename='img/logo-icon.png') }}" alt="WhatIDid.ai Beaver">
 ```
 
 If the logo file is missing, the header will gracefully fall back to showing just the text "WhatIDid.ai".
