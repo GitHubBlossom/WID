@@ -299,7 +299,7 @@ if __name__ == '__main__':
     print("=" * 60)
     print("What I Did - Flask Productivity Tracker")
     print("=" * 60)
-    print("Starting server at http://localhost:5000")
+    print("Starting server at http://localhost:5555")
     print("")
     print("Note: This is a simplified version for testing")
     print("      AI insights and Google sync are disabled")
@@ -314,4 +314,4 @@ if __name__ == '__main__':
     print("=" * 60)
 
     # Run the app
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5555)
