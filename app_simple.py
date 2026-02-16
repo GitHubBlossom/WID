@@ -1,6 +1,6 @@
 """
-What I Did - Flask Web Application
-A personal productivity tracker for logging activities, setting goals, and getting AI insights.
+What I Did - Flask Web Application (Simplified for Testing)
+A personal productivity tracker - without Google sync dependencies
 """
 
 from flask import Flask, render_template, request, jsonify, redirect, url_for, flash
@@ -14,31 +14,12 @@ from models import (
     ActivitySource, ActivityCategory, GoalStatus
 )
 
-# Optional imports - Google sync will be disabled if not available
-try:
-    from ai_assistant import AIAssistant
-    AI_AVAILABLE = True
-except ImportError:
-    AI_AVAILABLE = False
-    print("Warning: AI features disabled (anthropic module not available)")
-
-try:
-    from google_data_sync import sync_google_data
-    GOOGLE_SYNC_AVAILABLE = True
-except ImportError:
-    GOOGLE_SYNC_AVAILABLE = False
-    print("Warning: Google sync disabled (Google API modules not available)")
-
 # Initialize Flask app
 app = Flask(__name__)
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'dev-secret-key-change-in-production')
 
 # Initialize data store
 data_store = DataStore()
-
-# Initialize AI assistant (if available)
-ai_assistant = AIAssistant() if AI_AVAILABLE else None
-
 
 # Utility functions
 def get_current_week_start() -> str:
@@ -49,14 +30,7 @@ def get_current_week_start() -> str:
 
 
 def get_week_range(week_start_str: str) -> tuple:
-    """Get start and end dates for a week.
-
-    Args:
-        week_start_str: ISO format date string (Monday)
-
-    Returns:
-        Tuple of (start_date, end_date) as ISO strings
-    """
+    """Get start and end dates for a week."""
     week_start = date.fromisoformat(week_start_str)
     week_end = week_start + timedelta(days=6)
     return week_start.isoformat(), week_end.isoformat()
@@ -93,10 +67,10 @@ def index():
 
     return render_template('dashboard.html',
                           week_start=week_start,
-                          activities=activities[:10],  # Latest 10
+                          activities=activities[:10],
                           goals=goals,
-                          insights=insights[:5],  # Latest 5
-                          todos=todos[:10],  # Top 10
+                          insights=insights[:5],
+                          todos=todos[:10],
                           total_activities=total_activities,
                           total_hours=round(total_hours, 1),
                           completed_goals=completed_goals,
@@ -107,7 +81,6 @@ def index():
 @app.route('/activities')
 def activities():
     """Activity log page."""
-    # Get date range from query params or default to current week
     week_start = request.args.get('week', get_current_week_start())
     start_date, end_date = get_week_range(week_start)
 
@@ -124,7 +97,6 @@ def activities():
 def add_activity():
     """Add a new activity."""
     if request.method == 'POST':
-        # Create new activity from form data
         activity = Activity(
             id=str(uuid.uuid4()),
             date=request.form['date'],
@@ -153,7 +125,6 @@ def edit_activity(activity_id):
         return redirect(url_for('activities'))
 
     if request.method == 'POST':
-        # Update activity
         activity.date = request.form['date']
         activity.timestamp = f"{request.form['date']}T{request.form.get('time', '12:00:00')}"
         activity.title = request.form['title']
@@ -246,46 +217,8 @@ def insights():
 
 @app.route('/insights/generate', methods=['POST'])
 def generate_insights():
-    """Generate AI insights for the current week."""
-    if not AI_AVAILABLE:
-        return jsonify({'error': 'AI features not available. Set ANTHROPIC_API_KEY to enable.'}), 503
-
-    week_start = request.json.get('week_start', get_current_week_start())
-    start_date, end_date = get_week_range(week_start)
-
-    # Get data for the week
-    activities = data_store.get_activities(start_date, end_date)
-    goals = data_store.get_goals(week_start)
-
-    # Generate insights using AI
-    insights_data, todos_data = ai_assistant.generate_insights_and_todos(
-        activities=activities,
-        goals=goals,
-        week_start=week_start
-    )
-
-    # Save insights
-    for insight_dict in insights_data:
-        insight = Insight(
-            id=str(uuid.uuid4()),
-            generated_at=datetime.now().isoformat(),
-            week_start=week_start,
-            **insight_dict
-        )
-        data_store.save_insight(insight)
-
-    # Save todos
-    for todo_dict in todos_data:
-        todo = ToDo(
-            id=str(uuid.uuid4()),
-            generated_at=datetime.now().isoformat(),
-            status="pending",
-            **todo_dict
-        )
-        data_store.save_todo(todo)
-
-    flash(f'Generated {len(insights_data)} insights and {len(todos_data)} to-dos!', 'success')
-    return jsonify({'success': True, 'insights_count': len(insights_data), 'todos_count': len(todos_data)})
+    """Generate AI insights - disabled in this version."""
+    return jsonify({'error': 'AI features not available in this test version'}), 503
 
 
 @app.route('/todos')
@@ -324,20 +257,8 @@ def delete_todo(todo_id):
 
 @app.route('/sync/google', methods=['POST'])
 def sync_google():
-    """Sync data from Google services."""
-    if not GOOGLE_SYNC_AVAILABLE:
-        return jsonify({'error': 'Google sync not available. Install Google API dependencies to enable.'}), 503
-
-    try:
-        # Get date range
-        days = int(request.json.get('days', 7))
-        new_activities = sync_google_data(data_store, lookback_days=days)
-
-        flash(f'Synced {len(new_activities)} activities from Google services!', 'success')
-        return jsonify({'success': True, 'activities_synced': len(new_activities)})
-
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    """Sync Google data - disabled in this version."""
+    return jsonify({'error': 'Google sync not available in this test version'}), 503
 
 
 @app.route('/settings')
@@ -346,11 +267,9 @@ def settings():
     return render_template('settings.html')
 
 
-# API Routes for AJAX
-
 @app.route('/api/stats/week/<week_start>')
 def api_week_stats(week_start):
-    """Get statistics for a specific week (API endpoint)."""
+    """Get statistics for a specific week."""
     start_date, end_date = get_week_range(week_start)
 
     activities = data_store.get_activities(start_date, end_date)
@@ -376,6 +295,23 @@ def api_week_stats(week_start):
 if __name__ == '__main__':
     # Create data directory if it doesn't exist
     Path('data').mkdir(exist_ok=True)
+
+    print("=" * 60)
+    print("What I Did - Flask Productivity Tracker")
+    print("=" * 60)
+    print("Starting server at http://localhost:5000")
+    print("")
+    print("Note: This is a simplified version for testing")
+    print("      AI insights and Google sync are disabled")
+    print("")
+    print("Features available:")
+    print("  ✓ Dashboard with stats")
+    print("  ✓ Manual activity logging")
+    print("  ✓ Weekly goals management")
+    print("  ✓ View insights and to-dos")
+    print("")
+    print("Press Ctrl+C to stop the server")
+    print("=" * 60)
 
     # Run the app
     app.run(debug=True, host='0.0.0.0', port=5000)
