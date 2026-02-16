@@ -46,6 +46,31 @@
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
     }
 
+    /* Hero Side-by-Side Layout */
+    .hero-content {
+        display: flex;
+        align-items: center;
+        gap: 60px;
+        justify-content: center;
+    }
+
+    .hero-logo {
+        flex: 0 0 auto;
+    }
+
+    .hero-logo img {
+        max-width: 350px;
+        height: auto;
+        display: block;
+        filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.2));
+    }
+
+    .hero-text {
+        flex: 1;
+        text-align: left;
+        max-width: 550px;
+    }
+
     /* Features Section */
     .features {
         padding: 100px 0;
@@ -186,6 +211,21 @@
     }
 
     /* Responsive */
+    @media (max-width: 968px) {
+        .hero-content {
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .hero-text {
+            text-align: center;
+        }
+
+        .hero-logo img {
+            max-width: 280px;
+        }
+    }
+
     @media (max-width: 768px) {
         .hero h1 {
             font-size: 40px;
@@ -216,9 +256,18 @@
 <!-- Hero Section -->
 <section class="hero">
     <div class="container">
-        <h1>Your Week, Summarized by AI</h1>
-        <p>Automatically analyze your Gmail, Calendar, and Drive activity. Get intelligent insights into your productivity.</p>
-        <a href="{{ url_for('index') }}" class="hero-cta">Get Started Free →</a>
+        <div class="hero-content">
+            <div class="hero-logo">
+                <img src="{{ url_for('static', filename='img/logo-full.png') }}"
+                     alt="WhatIDid.ai Beaver Mascot"
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="hero-text">
+                <h1>Your Week, Summarized by AI</h1>
+                <p>Automatically analyze your Gmail, Calendar, and Drive activity. Get intelligent insights into your productivity.</p>
+                <a href="{{ url_for('index') }}" class="hero-cta">Get Started Free →</a>
+            </div>
+        </div>
     </div>
 </section>
 
