@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}AI Insights{% endblock %}
+
+{% block content %}
+<div class="insights-page">
+    <div class="page-header">
+        <h2>AI Insights</h2>
+        <button class="btn btn-primary" onclick="generateInsights()">🤖 Generate New Insights</button>
+    </div>
+
+    <div class="filters">
+        <label>Week:
+            <input type="week" value="{{ week_start }}" onchange="location.href='?week='+this.value">
+        </label>
+    </div>
+
+    {% if insights %}
+    <div class="insights-container">
+        {% for insight in insights %}
+        <div class="insight-card insight-{{ insight.insight_type }}">
+            <div class="insight-header">
+                <div class="insight-type">
+                    {% if insight.insight_type == 'summary' %}📊
+                    {% elif insight.insight_type == 'pattern' %}🔍
+                    {% elif insight.insight_type == 'recommendation' %}💡
+                    {% endif %}
+                    {{ insight.insight_type.title() }}
+                </div>
+                <div class="insight-confidence">
+                    Confidence: {{ (insight.confidence * 100)|round }}%
+                </div>
+            </div>
+
+            <h3>{{ insight.title }}</h3>
+            <p>{{ insight.content }}</p>
+
+            <div class="insight-meta">
+                <small>Generated: {{ insight.generated_at[:10] }}</small>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <h3>No insights yet</h3>
+        <p>Generate AI-powered insights based on your activities and goals.</p>
+        <button class="btn btn-primary" onclick="generateInsights()">🤖 Generate Insights Now</button>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+function generateInsights() {
+    if (!confirm('Generate AI insights for this week? This will analyze your activities and goals.')) return;
+
+    const weekStart = new URLSearchParams(window.location.search).get('week') || '{{ week_start }}';
+
+    fetch('/insights/generate', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({week_start: weekStart})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(`Generated ${data.insights_count} insights and ${data.todos_count} to-dos!`);
+            location.reload();
+        } else {
+            alert('Error: ' + (data.error || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        alert('Error: ' + error);
+    });
+}
+</script>
+{% endblock %}

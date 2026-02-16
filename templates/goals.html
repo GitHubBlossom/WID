@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Weekly Goals{% endblock %}
+
+{% block content %}
+<div class="goals-page">
+    <div class="page-header">
+        <h2>Weekly Goals</h2>
+        <a href="{{ url_for('add_goal') }}" class="btn btn-primary">+ Add Goal</a>
+    </div>
+
+    <div class="filters">
+        <label>Week:
+            <input type="week" value="{{ week_start }}" onchange="location.href='?week='+this.value">
+        </label>
+    </div>
+
+    {% if goals %}
+    <div class="goals-grid">
+        {% for goal in goals %}
+        <div class="goal-card goal-{{ goal.status }}">
+            <div class="goal-header">
+                <h3>{{ goal.title }}</h3>
+                <div class="goal-status-badge">{{ goal.status.replace('_', ' ').title() }}</div>
+            </div>
+
+            <p class="goal-description">{{ goal.description }}</p>
+
+            {% if goal.target_hours %}
+            <div class="goal-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: {{ ((goal.actual_hours or 0) / goal.target_hours * 100) if goal.target_hours > 0 else 0 }}%"></div>
+                </div>
+                <div class="progress-text">
+                    {{ goal.actual_hours or 0 }} / {{ goal.target_hours }} hours
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="goal-actions">
+                <select onchange="updateGoalStatus('{{ goal.id }}', this.value)">
+                    <option value="">Change status...</option>
+                    <option value="not_started" {% if goal.status == 'not_started' %}selected{% endif %}>Not Started</option>
+                    <option value="in_progress" {% if goal.status == 'in_progress' %}selected{% endif %}>In Progress</option>
+                    <option value="completed" {% if goal.status == 'completed' %}selected{% endif %}>Completed</option>
+                    <option value="cancelled" {% if goal.status == 'cancelled' %}selected{% endif %}>Cancelled</option>
+                </select>
+
+                <form method="POST" action="{{ url_for('delete_goal', goal_id=goal.id) }}" style="display:inline;">
+                    <button type="submit" class="btn-sm btn-danger" onclick="return confirm('Delete this goal?')">Delete</button>
+                </form>
+            </div>
+
+            <div class="goal-meta">
+                <small>Created: {{ goal.created_at[:10] }}</small>
+                {% if goal.completed_at %}
+                <small>Completed: {{ goal.completed_at[:10] }}</small>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <h3>No goals set for this week</h3>
+        <p><a href="{{ url_for('add_goal') }}">Set your first goal</a> to stay focused and productive!</p>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+function updateGoalStatus(goalId, status) {
+    if (!status) return;
+
+    fetch(`/goals/${goalId}/update_status`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({status: status})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        }
+    });
+}
+</script>
+{% endblock %}

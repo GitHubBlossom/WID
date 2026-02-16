@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}To-Dos{% endblock %}
+
+{% block content %}
+<div class="todos-page">
+    <div class="page-header">
+        <h2>To-Do List</h2>
+    </div>
+
+    <div class="filters">
+        <label>Status:
+            <select onchange="location.href='?status='+this.value">
+                <option value="all" {% if status_filter == 'all' %}selected{% endif %}>All</option>
+                <option value="pending" {% if status_filter == 'pending' %}selected{% endif %}>Pending</option>
+                <option value="in_progress" {% if status_filter == 'in_progress' %}selected{% endif %}>In Progress</option>
+                <option value="completed" {% if status_filter == 'completed' %}selected{% endif %}>Completed</option>
+                <option value="dismissed" {% if status_filter == 'dismissed' %}selected{% endif %}>Dismissed</option>
+            </select>
+        </label>
+    </div>
+
+    {% if todos %}
+    <div class="todos-container">
+        {% for todo in todos %}
+        <div class="todo-card todo-{{ todo.priority }} {% if todo.status == 'completed' %}todo-completed{% endif %}">
+            <div class="todo-header">
+                <input type="checkbox"
+                       {% if todo.status == 'completed' %}checked{% endif %}
+                       onchange="updateTodoStatus('{{ todo.id }}', this.checked ? 'completed' : 'pending')">
+                <h3>{{ todo.title }}</h3>
+                <span class="priority-badge priority-{{ todo.priority }}">{{ todo.priority }}</span>
+            </div>
+
+            <p>{{ todo.description }}</p>
+
+            {% if todo.due_date %}
+            <div class="todo-due-date">
+                📅 Due: {{ todo.due_date }}
+            </div>
+            {% endif %}
+
+            <div class="todo-actions">
+                <select onchange="updateTodoStatus('{{ todo.id }}', this.value)">
+                    <option value="">Change status...</option>
+                    <option value="pending" {% if todo.status == 'pending' %}selected{% endif %}>Pending</option>
+                    <option value="in_progress" {% if todo.status == 'in_progress' %}selected{% endif %}>In Progress</option>
+                    <option value="completed" {% if todo.status == 'completed' %}selected{% endif %}>Completed</option>
+                    <option value="dismissed" {% if todo.status == 'dismissed' %}selected{% endif %}>Dismiss</option>
+                </select>
+
+                <form method="POST" action="{{ url_for('delete_todo', todo_id=todo.id) }}" style="display:inline;">
+                    <button type="submit" class="btn-sm btn-danger" onclick="return confirm('Delete this to-do?')">Delete</button>
+                </form>
+            </div>
+
+            <div class="todo-meta">
+                <small>Generated: {{ todo.generated_at[:10] }}</small>
+                {% if todo.completed_at %}
+                <small>Completed: {{ todo.completed_at[:10] }}</small>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <h3>No to-dos found</h3>
+        <p>Generate AI-powered to-dos from your insights.</p>
+        <a href="{{ url_for('insights') }}" class="btn btn-primary">Go to Insights</a>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+function updateTodoStatus(todoId, status) {
+    if (!status) return;
+
+    fetch(`/todos/${todoId}/update_status`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({status: status})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        }
+    });
+}
+</script>
+{% endblock %}
