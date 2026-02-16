@@ -1,15 +1,19 @@
-# Weekly Activity Summary
+# Productivity Analyzer
 
-An intelligent application that automatically generates comprehensive weekly activity reports by analyzing your Gmail, Google Calendar, and Google Drive activity. Powered by AI (Anthropic Claude) to provide insightful summaries of your work.
+An intelligent web application that automatically generates productivity summaries by analyzing your Gmail, Google Calendar, and Google Drive activity. Powered by AI (Anthropic Claude) to provide insightful summaries of your work.
 
 ## Features
 
+- **🌐 Web Interface**: Easy-to-use web dashboard for configuration and viewing summaries
+- **⚙️ Simple Setup**: Configure OAuth credentials and settings via web page
+- **▶️ On-Demand Analysis**: Click "Run" button to generate summaries for any period (yesterday or custom)
+- **📊 Weekly History**: View past summaries grouped by calendar week
+- **⏰ Automated Scheduling**: Optionally runs on your chosen day/time (e.g., Sunday evenings)
+- **📧 Email Summaries**: Automatically sends nice-looking email summaries
+- **🤖 AI-Powered**: Uses Claude to categorize work and identify potential to-dos
 - **📧 Email Analysis**: Tracks sent and received emails, identifies top contacts
 - **📅 Calendar Insights**: Summarizes meetings, calculates time spent, tracks attendees
 - **📄 Document Tracking**: Monitors Google Docs, Sheets, and Slides activity
-- **🤖 AI-Powered Summaries**: Uses Claude to generate meaningful insights
-- **⏰ Automated Scheduling**: Runs automatically every Sunday at 6 PM (configurable)
-- **📊 Multiple Formats**: Export reports as Markdown, HTML, or plain text
 
 ## Quick Start
 
@@ -63,79 +67,70 @@ pip install -r requirements.txt
 
 ### 5. Configuration
 
-Edit the `.env` file to customize your settings:
+Create a `.env` file in the project directory:
 
 ```env
 # Required
 ANTHROPIC_API_KEY=your_anthropic_api_key_here
 
-# Optional - customize as needed
-SCHEDULE_DAY=sunday          # Day to run reports
-SCHEDULE_HOUR=18             # Hour (24-hour format)
-SCHEDULE_MINUTE=0            # Minute
-TIMEZONE=America/New_York    # Your timezone
-LOOKBACK_DAYS=7              # Days to look back
-REPORT_FORMAT=markdown       # markdown, html, or txt
+# Optional - these can be configured via the web interface
+FLASK_SECRET_KEY=change-this-to-something-random
 ```
 
-### 6. First Run - Authentication
-
-Test your Google API authentication:
+### 6. Start the Application
 
 ```bash
-python main.py test-auth
+python app.py
 ```
 
-This will open a browser window for you to authorize the application. Once authorized, a `token.json` file will be created for future use.
+The web application will start on `http://localhost:5555`
 
 ## Usage
 
-### Generate a Report Immediately
+### First-Time Setup
+
+1. **Start the app**: `python app.py`
+2. **Access the web interface**: Open `http://localhost:5555` in your browser
+3. **Setup OAuth**: You'll be redirected to the setup page
+   - Place your `credentials.json` file in the project directory
+   - The app will guide you through Google OAuth authentication
+4. **Configure Settings**:
+   - Choose your timezone
+   - Set when you want weekly summaries to run (e.g., Sunday at 6 PM)
+   - Set how many days to analyze (default: 1 = yesterday)
+   - Enable/disable automatic email summaries
+
+### Generating Summaries
+
+**Manual (On-Demand):**
+- Click the **"Run Analysis Now"** button on the dashboard
+- Or use **"Run Custom Period"** to analyze a different number of days
+
+**Automatic (Scheduled):**
+- Configure your preferred schedule in Settings
+- The app runs in the background and generates summaries automatically
+- If enabled, sends email summaries automatically
+
+### Viewing History
+
+- All generated summaries appear on the dashboard
+- Summaries are grouped by calendar week
+- Click "View" to see the full summary report
+
+### CLI Usage (Alternative)
+
+For command-line usage without the web interface, you can use:
 
 ```bash
+# Generate a report immediately
 python main.py run-now
-```
 
-This will:
-1. Collect data from Gmail, Calendar, and Drive
-2. Generate an AI-powered summary
-3. Save the report to the `reports/` directory
-4. Display a summary in the console
-
-### Start the Scheduler
-
-```bash
+# Start the scheduler (blocking)
 python main.py schedule
+
+# Test Google authentication
+python main.py test-auth
 ```
-
-This will:
-1. Start a background scheduler
-2. Run the report generation every Sunday at 6 PM (or your configured time)
-3. Keep running until you stop it (Ctrl+C)
-
-### Running as a System Service (Linux)
-
-For production use, you can run the scheduler as a systemd service:
-
-1. Edit the provided service file:
-   ```bash
-   nano weekly-activity-summary.service
-   ```
-
-2. Update the paths to match your installation
-
-3. Install the service:
-   ```bash
-   sudo cp weekly-activity-summary.service /etc/systemd/system/
-   sudo systemctl daemon-reload
-   sudo systemctl enable weekly-activity-summary
-   sudo systemctl start weekly-activity-summary
-   ```
-
-4. Check status:
-   ```bash
-   sudo systemctl status weekly-activity-summary
-   ```
 
 ## Report Output
 
@@ -180,26 +175,18 @@ Reports are saved to the `reports/` directory with timestamps:
 
 ## Customization
 
-### Changing the Schedule
+All customization is done through the web interface:
 
-Edit `.env`:
-```env
-SCHEDULE_DAY=friday          # Run on Friday instead
-SCHEDULE_HOUR=17             # At 5 PM
-SCHEDULE_MINUTE=30           # At 5:30 PM
-```
+1. Go to **Settings** in the navigation menu
+2. Adjust:
+   - **Timezone**: Your local timezone
+   - **Schedule Day**: Which day to run automatic summaries
+   - **Schedule Time**: Hour and minute for automatic runs
+   - **Lookback Days**: How many days to analyze (1 = yesterday, 7 = past week)
+   - **Auto Email**: Enable/disable automatic email summaries
+3. Click **Save Settings**
 
-### Changing the Lookback Period
-
-```env
-LOOKBACK_DAYS=14             # Look back 2 weeks instead of 1
-```
-
-### Changing Report Format
-
-```env
-REPORT_FORMAT=html           # Generate HTML reports
-```
+Settings are saved to `data/settings.json` and persist across restarts.
 
 ## Troubleshooting
 
@@ -229,17 +216,28 @@ Check that:
 
 ```
 WID/
-├── main.py                  # Main entry point
-├── config.py                # Configuration management
-├── google_auth.py           # Google API authentication
+├── app.py                   # Flask web application
+├── email_sender.py          # Email sending via Gmail API
+├── report_generator.py      # Report orchestration
+├── activity_summarizer.py   # AI summarization
 ├── gmail_collector.py       # Gmail data collection
 ├── calendar_collector.py    # Calendar data collection
 ├── drive_collector.py       # Drive/Docs data collection
-├── activity_summarizer.py   # AI summarization
-├── report_generator.py      # Report orchestration
-├── scheduler.py             # Scheduling logic
+├── google_auth.py           # Google API authentication
+├── config.py                # Configuration management
+├── scheduler.py             # Scheduling logic (CLI)
+├── main.py                  # CLI entry point
+├── templates/               # Web UI templates
+│   ├── base.html           # Base template
+│   ├── dashboard.html      # Dashboard page
+│   ├── setup.html          # Setup/settings page
+│   └── summary.html        # Summary view page
+├── data/                    # Generated data
+│   ├── settings.json       # User settings
+│   └── summaries/          # Generated summaries
+├── reports/                 # Generated reports
 ├── requirements.txt         # Python dependencies
-├── .env.example            # Example configuration
+├── .env                    # Configuration (API keys)
 ├── .gitignore              # Git ignore rules
 └── README.md               # This file
 ```

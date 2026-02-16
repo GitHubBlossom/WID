@@ -1,381 +1,327 @@
 """
-What I Did - Flask Web Application
-A personal productivity tracker for logging activities, setting goals, and getting AI insights.
+Productivity Analyzer - Web Application
+Analyzes Gmail, Calendar, and Drive activity to generate productivity summaries
 """
 
-from flask import Flask, render_template, request, jsonify, redirect, url_for, flash
-from datetime import datetime, timedelta, date
-from pathlib import Path
-import uuid
+from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, send_file
+from datetime import datetime, timedelta
 import os
+import json
+from pathlib import Path
+import logging
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.cron import CronTrigger
+import pytz
 
-from models import (
-    DataStore, Activity, WeeklyGoal, Insight, ToDo,
-    ActivitySource, ActivityCategory, GoalStatus
-)
+# Import our modules
+from report_generator import ReportGenerator
+from email_sender import EmailSender
+import config
 
-# Optional imports - Google sync will be disabled if not available
-try:
-    from ai_assistant import AIAssistant
-    AI_AVAILABLE = True
-except ImportError:
-    AI_AVAILABLE = False
-    print("Warning: AI features disabled (anthropic module not available)")
-
-try:
-    from google_data_sync import sync_google_data
-    GOOGLE_SYNC_AVAILABLE = True
-except ImportError:
-    GOOGLE_SYNC_AVAILABLE = False
-    print("Warning: Google sync disabled (Google API modules not available)")
+# Setup logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Initialize Flask app
 app = Flask(__name__)
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'dev-secret-key-change-in-production')
 
-# Initialize data store
-data_store = DataStore()
+# Initialize scheduler
+scheduler = BackgroundScheduler()
 
-# Initialize AI assistant (if available)
-ai_assistant = AIAssistant() if AI_AVAILABLE else None
+# Data directory for storing summaries
+DATA_DIR = Path('data/summaries')
+DATA_DIR.mkdir(parents=True, exist_ok=True)
 
-
-# Utility functions
-def get_current_week_start() -> str:
-    """Get the Monday of the current week in ISO format."""
-    today = date.today()
-    monday = today - timedelta(days=today.weekday())
-    return monday.isoformat()
+# Config file for user settings
+SETTINGS_FILE = Path('data/settings.json')
 
 
-def get_week_range(week_start_str: str) -> tuple:
-    """Get start and end dates for a week.
+def load_settings():
+    """Load user settings from file."""
+    if SETTINGS_FILE.exists():
+        with open(SETTINGS_FILE, 'r') as f:
+            return json.load(f)
+    return {
+        'timezone': 'America/New_York',
+        'schedule_day': 'sunday',
+        'schedule_hour': 18,
+        'schedule_minute': 0,
+        'lookback_days': 1,
+        'auto_email_enabled': False
+    }
 
-    Args:
-        week_start_str: ISO format date string (Monday)
 
-    Returns:
-        Tuple of (start_date, end_date) as ISO strings
-    """
-    week_start = date.fromisoformat(week_start_str)
-    week_end = week_start + timedelta(days=6)
-    return week_start.isoformat(), week_end.isoformat()
+def save_settings(settings):
+    """Save user settings to file."""
+    SETTINGS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    with open(SETTINGS_FILE, 'w') as f:
+        json.dump(settings, f, indent=2)
+
+
+def generate_summary(lookback_days=1):
+    """Generate a productivity summary for the specified period."""
+    try:
+        logger.info(f"Generating summary for past {lookback_days} day(s)...")
+
+        # Generate report
+        generator = ReportGenerator()
+        report_path = generator.generate_report()
+
+        # Save summary metadata
+        summary_date = datetime.now().isoformat()
+        summary_file = DATA_DIR / f"summary_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.json"
+
+        with open(summary_file, 'w') as f:
+            json.dump({
+                'date': summary_date,
+                'lookback_days': lookback_days,
+                'report_path': str(report_path)
+            }, f, indent=2)
+
+        logger.info(f"Summary generated: {report_path}")
+
+        # Send email if enabled
+        settings = load_settings()
+        if settings.get('auto_email_enabled'):
+            try:
+                email_sender = EmailSender()
+                email_sender.send_summary_email(report_path, summary_date)
+                logger.info("Summary email sent successfully")
+            except Exception as e:
+                logger.error(f"Failed to send email: {e}")
+
+        return True, str(report_path)
+
+    except Exception as e:
+        logger.error(f"Error generating summary: {e}")
+        return False, str(e)
+
+
+def schedule_weekly_summary():
+    """Schedule the weekly summary generation based on user settings."""
+    settings = load_settings()
+
+    # Clear existing jobs
+    scheduler.remove_all_jobs()
+
+    # Map day names to cron day numbers
+    day_mapping = {
+        'sunday': 0, 'monday': 1, 'tuesday': 2, 'wednesday': 3,
+        'thursday': 4, 'friday': 5, 'saturday': 6
+    }
+
+    day_of_week = day_mapping.get(settings['schedule_day'], 0)
+
+    # Create trigger
+    trigger = CronTrigger(
+        day_of_week=day_of_week,
+        hour=settings['schedule_hour'],
+        minute=settings['schedule_minute'],
+        timezone=pytz.timezone(settings['timezone'])
+    )
+
+    # Add job
+    scheduler.add_job(
+        lambda: generate_summary(settings.get('lookback_days', 1)),
+        trigger,
+        id='weekly_summary',
+        name='Weekly Productivity Summary',
+        replace_existing=True
+    )
+
+    logger.info(
+        f"Scheduled weekly summary for {settings['schedule_day'].capitalize()} "
+        f"at {settings['schedule_hour']:02d}:{settings['schedule_minute']:02d} "
+        f"{settings['timezone']}"
+    )
 
 
 # Routes
 
 @app.route('/')
 def index():
-    """Dashboard/home page."""
-    week_start = get_current_week_start()
-    start_date, end_date = get_week_range(week_start)
+    """Dashboard page."""
+    # Check if OAuth is configured
+    if not Path('token.json').exists() or not Path('credentials.json').exists():
+        return redirect(url_for('setup'))
 
-    # Get current week's data
-    activities = data_store.get_activities(start_date, end_date)
-    goals = data_store.get_goals(week_start)
-    insights = data_store.get_insights(week_start)
-    todos = data_store.get_todos(status="pending")
+    # Load settings
+    settings = load_settings()
 
-    # Calculate statistics
-    total_activities = len(activities)
-    total_hours = sum(a.duration_minutes or 0 for a in activities) / 60
-    completed_goals = len([g for g in goals if g.status == GoalStatus.COMPLETED.value])
-    total_goals = len(goals)
+    # Get all summaries grouped by week
+    summaries_by_week = get_summaries_by_week()
 
-    # Activity breakdown by category
-    category_stats = {}
-    for activity in activities:
-        cat = activity.category
-        if cat not in category_stats:
-            category_stats[cat] = {'count': 0, 'hours': 0}
-        category_stats[cat]['count'] += 1
-        category_stats[cat]['hours'] += (activity.duration_minutes or 0) / 60
+    # Get next scheduled run time
+    next_run = None
+    job = scheduler.get_job('weekly_summary')
+    if job:
+        next_run = job.next_run_time
 
-    return render_template('dashboard.html',
-                          week_start=week_start,
-                          activities=activities[:10],  # Latest 10
-                          goals=goals,
-                          insights=insights[:5],  # Latest 5
-                          todos=todos[:10],  # Top 10
-                          total_activities=total_activities,
-                          total_hours=round(total_hours, 1),
-                          completed_goals=completed_goals,
-                          total_goals=total_goals,
-                          category_stats=category_stats)
-
-
-@app.route('/activities')
-def activities():
-    """Activity log page."""
-    # Get date range from query params or default to current week
-    week_start = request.args.get('week', get_current_week_start())
-    start_date, end_date = get_week_range(week_start)
-
-    activities = data_store.get_activities(start_date, end_date)
-
-    return render_template('activities.html',
-                          activities=activities,
-                          week_start=week_start,
-                          categories=ActivityCategory,
-                          sources=ActivitySource)
-
-
-@app.route('/activities/add', methods=['GET', 'POST'])
-def add_activity():
-    """Add a new activity."""
-    if request.method == 'POST':
-        # Create new activity from form data
-        activity = Activity(
-            id=str(uuid.uuid4()),
-            date=request.form['date'],
-            timestamp=f"{request.form['date']}T{request.form.get('time', '12:00:00')}",
-            title=request.form['title'],
-            description=request.form.get('description', ''),
-            category=request.form['category'],
-            source=ActivitySource.MANUAL.value,
-            duration_minutes=int(request.form['duration']) if request.form.get('duration') else None,
-            tags=request.form.get('tags', '').split(',') if request.form.get('tags') else []
-        )
-
-        data_store.save_activity(activity)
-        flash('Activity added successfully!', 'success')
-        return redirect(url_for('activities'))
-
-    return render_template('add_activity.html', categories=ActivityCategory)
-
-
-@app.route('/activities/<activity_id>/edit', methods=['GET', 'POST'])
-def edit_activity(activity_id):
-    """Edit an existing activity."""
-    activity = data_store.get_activity(activity_id)
-    if not activity:
-        flash('Activity not found', 'error')
-        return redirect(url_for('activities'))
-
-    if request.method == 'POST':
-        # Update activity
-        activity.date = request.form['date']
-        activity.timestamp = f"{request.form['date']}T{request.form.get('time', '12:00:00')}"
-        activity.title = request.form['title']
-        activity.description = request.form.get('description', '')
-        activity.category = request.form['category']
-        activity.duration_minutes = int(request.form['duration']) if request.form.get('duration') else None
-        activity.tags = request.form.get('tags', '').split(',') if request.form.get('tags') else []
-
-        data_store.save_activity(activity)
-        flash('Activity updated successfully!', 'success')
-        return redirect(url_for('activities'))
-
-    return render_template('edit_activity.html', activity=activity, categories=ActivityCategory)
-
-
-@app.route('/activities/<activity_id>/delete', methods=['POST'])
-def delete_activity(activity_id):
-    """Delete an activity."""
-    data_store.delete_activity(activity_id)
-    flash('Activity deleted successfully!', 'success')
-    return redirect(url_for('activities'))
-
-
-@app.route('/goals')
-def goals():
-    """Weekly goals page."""
-    week_start = request.args.get('week', get_current_week_start())
-    goals = data_store.get_goals(week_start)
-
-    return render_template('goals.html', goals=goals, week_start=week_start)
-
-
-@app.route('/goals/add', methods=['GET', 'POST'])
-def add_goal():
-    """Add a new weekly goal."""
-    if request.method == 'POST':
-        now = datetime.now().isoformat()
-        goal = WeeklyGoal(
-            id=str(uuid.uuid4()),
-            week_start=request.form['week_start'],
-            title=request.form['title'],
-            description=request.form.get('description', ''),
-            status=GoalStatus.NOT_STARTED.value,
-            created_at=now,
-            updated_at=now,
-            target_hours=float(request.form['target_hours']) if request.form.get('target_hours') else None
-        )
-
-        data_store.save_goal(goal)
-        flash('Goal added successfully!', 'success')
-        return redirect(url_for('goals'))
-
-    return render_template('add_goal.html', week_start=get_current_week_start())
-
-
-@app.route('/goals/<goal_id>/update_status', methods=['POST'])
-def update_goal_status(goal_id):
-    """Update a goal's status."""
-    goal = data_store.get_goal(goal_id)
-    if not goal:
-        return jsonify({'error': 'Goal not found'}), 404
-
-    new_status = request.json.get('status')
-    goal.status = new_status
-    goal.updated_at = datetime.now().isoformat()
-
-    if new_status == GoalStatus.COMPLETED.value:
-        goal.completed_at = datetime.now().isoformat()
-
-    data_store.save_goal(goal)
-    return jsonify({'success': True})
-
-
-@app.route('/goals/<goal_id>/delete', methods=['POST'])
-def delete_goal(goal_id):
-    """Delete a goal."""
-    data_store.delete_goal(goal_id)
-    flash('Goal deleted successfully!', 'success')
-    return redirect(url_for('goals'))
-
-
-@app.route('/insights')
-def insights():
-    """AI insights page."""
-    week_start = request.args.get('week', get_current_week_start())
-    insights = data_store.get_insights(week_start)
-
-    return render_template('insights.html', insights=insights, week_start=week_start)
-
-
-@app.route('/insights/generate', methods=['POST'])
-def generate_insights():
-    """Generate AI insights for the current week."""
-    if not AI_AVAILABLE:
-        return jsonify({'error': 'AI features not available. Set ANTHROPIC_API_KEY to enable.'}), 503
-
-    week_start = request.json.get('week_start', get_current_week_start())
-    start_date, end_date = get_week_range(week_start)
-
-    # Get data for the week
-    activities = data_store.get_activities(start_date, end_date)
-    goals = data_store.get_goals(week_start)
-
-    # Generate insights using AI
-    insights_data, todos_data = ai_assistant.generate_insights_and_todos(
-        activities=activities,
-        goals=goals,
-        week_start=week_start
+    return render_template(
+        'dashboard.html',
+        settings=settings,
+        summaries_by_week=summaries_by_week,
+        next_run=next_run
     )
 
-    # Save insights
-    for insight_dict in insights_data:
-        insight = Insight(
-            id=str(uuid.uuid4()),
-            generated_at=datetime.now().isoformat(),
-            week_start=week_start,
-            **insight_dict
-        )
-        data_store.save_insight(insight)
 
-    # Save todos
-    for todo_dict in todos_data:
-        todo = ToDo(
-            id=str(uuid.uuid4()),
-            generated_at=datetime.now().isoformat(),
-            status="pending",
-            **todo_dict
-        )
-        data_store.save_todo(todo)
+@app.route('/setup', methods=['GET', 'POST'])
+def setup():
+    """Setup page for OAuth and settings configuration."""
+    if request.method == 'POST':
+        # Save settings
+        settings = {
+            'timezone': request.form.get('timezone', 'America/New_York'),
+            'schedule_day': request.form.get('schedule_day', 'sunday'),
+            'schedule_hour': int(request.form.get('schedule_hour', 18)),
+            'schedule_minute': int(request.form.get('schedule_minute', 0)),
+            'lookback_days': int(request.form.get('lookback_days', 1)),
+            'auto_email_enabled': request.form.get('auto_email_enabled') == 'on'
+        }
+        save_settings(settings)
 
-    flash(f'Generated {len(insights_data)} insights and {len(todos_data)} to-dos!', 'success')
-    return jsonify({'success': True, 'insights_count': len(insights_data), 'todos_count': len(todos_data)})
+        # Reschedule
+        schedule_weekly_summary()
 
+        flash('Settings saved successfully!', 'success')
+        return redirect(url_for('index'))
 
-@app.route('/todos')
-def todos():
-    """To-dos page."""
-    status_filter = request.args.get('status', 'pending')
-    todos = data_store.get_todos(status=status_filter if status_filter != 'all' else None)
+    # Load current settings
+    settings = load_settings()
 
-    return render_template('todos.html', todos=todos, status_filter=status_filter)
+    # Check OAuth status
+    oauth_configured = Path('credentials.json').exists()
+    oauth_authenticated = Path('token.json').exists()
 
+    # Get timezone list
+    timezones = pytz.common_timezones
 
-@app.route('/todos/<todo_id>/update_status', methods=['POST'])
-def update_todo_status(todo_id):
-    """Update a to-do's status."""
-    todo = data_store.get_todo(todo_id)
-    if not todo:
-        return jsonify({'error': 'To-do not found'}), 404
-
-    new_status = request.json.get('status')
-    todo.status = new_status
-
-    if new_status == 'completed':
-        todo.completed_at = datetime.now().isoformat()
-
-    data_store.save_todo(todo)
-    return jsonify({'success': True})
+    return render_template(
+        'setup.html',
+        settings=settings,
+        oauth_configured=oauth_configured,
+        oauth_authenticated=oauth_authenticated,
+        timezones=timezones
+    )
 
 
-@app.route('/todos/<todo_id>/delete', methods=['POST'])
-def delete_todo(todo_id):
-    """Delete a to-do."""
-    data_store.delete_todo(todo_id)
-    flash('To-do deleted successfully!', 'success')
-    return redirect(url_for('todos'))
+@app.route('/run', methods=['POST'])
+def run_summary():
+    """Manually trigger summary generation."""
+    settings = load_settings()
+    lookback_days = int(request.form.get('lookback_days', settings.get('lookback_days', 1)))
+
+    success, result = generate_summary(lookback_days)
+
+    if success:
+        flash(f'Summary generated successfully! Report saved to: {result}', 'success')
+    else:
+        flash(f'Error generating summary: {result}', 'error')
+
+    return redirect(url_for('index'))
 
 
-@app.route('/sync/google', methods=['POST'])
-def sync_google():
-    """Sync data from Google services."""
-    if not GOOGLE_SYNC_AVAILABLE:
-        return jsonify({'error': 'Google sync not available. Install Google API dependencies to enable.'}), 503
+@app.route('/summary/<date>')
+def view_summary(date):
+    """View a specific summary."""
+    # Find the summary file for this date
+    summary_files = list(DATA_DIR.glob(f"summary_{date}*.json"))
 
+    if not summary_files:
+        flash('Summary not found', 'error')
+        return redirect(url_for('index'))
+
+    # Load the summary
+    with open(summary_files[0], 'r') as f:
+        summary_data = json.load(f)
+
+    # Load the report
+    report_path = Path(summary_data['report_path'])
+    if report_path.exists():
+        with open(report_path, 'r') as f:
+            report_content = f.read()
+    else:
+        report_content = "Report file not found"
+
+    return render_template(
+        'summary.html',
+        summary_data=summary_data,
+        report_content=report_content
+    )
+
+
+@app.route('/api/test-auth')
+def test_auth():
+    """Test Google API authentication."""
     try:
-        # Get date range
-        days = int(request.json.get('days', 7))
-        new_activities = sync_google_data(data_store, lookback_days=days)
+        from google_auth import get_gmail_service
 
-        flash(f'Synced {len(new_activities)} activities from Google services!', 'success')
-        return jsonify({'success': True, 'activities_synced': len(new_activities)})
+        gmail = get_gmail_service()
+        profile = gmail.users().getProfile(userId='me').execute()
 
+        return jsonify({
+            'success': True,
+            'email': profile.get('emailAddress')
+        })
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
 
 
-@app.route('/settings')
-def settings():
-    """Settings page."""
-    return render_template('settings.html')
+def get_summaries_by_week():
+    """Get all summaries grouped by calendar week."""
+    summaries = []
 
+    for summary_file in sorted(DATA_DIR.glob('summary_*.json'), reverse=True):
+        try:
+            with open(summary_file, 'r') as f:
+                summary_data = json.load(f)
 
-# API Routes for AJAX
+            # Parse date
+            date = datetime.fromisoformat(summary_data['date'])
 
-@app.route('/api/stats/week/<week_start>')
-def api_week_stats(week_start):
-    """Get statistics for a specific week (API endpoint)."""
-    start_date, end_date = get_week_range(week_start)
+            # Get week info
+            week_number = date.isocalendar()[1]
+            year = date.year
+            week_key = f"{year}-W{week_number:02d}"
 
-    activities = data_store.get_activities(start_date, end_date)
-    goals = data_store.get_goals(week_start)
+            summaries.append({
+                'date': date,
+                'date_str': date.strftime('%Y-%m-%d'),
+                'date_display': date.strftime('%B %d, %Y at %I:%M %p'),
+                'week_key': week_key,
+                'week_display': f"Week {week_number}, {year}",
+                'lookback_days': summary_data.get('lookback_days', 1),
+                'report_path': summary_data.get('report_path', '')
+            })
+        except Exception as e:
+            logger.warning(f"Error loading summary {summary_file}: {e}")
+            continue
 
-    stats = {
-        'total_activities': len(activities),
-        'total_hours': sum(a.duration_minutes or 0 for a in activities) / 60,
-        'goals_completed': len([g for g in goals if g.status == GoalStatus.COMPLETED.value]),
-        'goals_total': len(goals),
-        'category_breakdown': {}
-    }
+    # Group by week
+    grouped = {}
+    for summary in summaries:
+        week_key = summary['week_key']
+        if week_key not in grouped:
+            grouped[week_key] = {
+                'week_display': summary['week_display'],
+                'summaries': []
+            }
+        grouped[week_key]['summaries'].append(summary)
 
-    for activity in activities:
-        cat = activity.category
-        if cat not in stats['category_breakdown']:
-            stats['category_breakdown'][cat] = 0
-        stats['category_breakdown'][cat] += 1
-
-    return jsonify(stats)
+    return grouped
 
 
 if __name__ == '__main__':
-    # Create data directory if it doesn't exist
-    Path('data').mkdir(exist_ok=True)
+    # Initialize scheduler
+    schedule_weekly_summary()
+    scheduler.start()
 
-    # Run the app
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    logger.info("Starting Productivity Analyzer web application...")
+    logger.info("Access the app at http://localhost:5555")
+
+    # Run Flask app
+    app.run(debug=True, host='0.0.0.0', port=5555)

@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}Setup - Productivity Analyzer{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>⚙️ Setup & Configuration</h2>
+
+    <div class="setup-section">
+        <h3>1. Google OAuth Configuration</h3>
+
+        {% if oauth_configured and oauth_authenticated %}
+            <p style="color: #27ae60;">✅ OAuth is configured and authenticated</p>
+        {% elif oauth_configured %}
+            <p style="color: #f39c12;">⚠️ OAuth credentials found, but not authenticated yet. Run the app to authenticate.</p>
+        {% else %}
+            <div style="background-color: #fff3cd; padding: 15px; border-radius: 4px; margin: 10px 0;">
+                <strong>📝 Setup Instructions:</strong>
+                <ol style="margin-left: 20px; margin-top: 10px;">
+                    <li>Go to <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a></li>
+                    <li>Create a new project or select existing one</li>
+                    <li>Enable Gmail, Calendar, and Drive APIs</li>
+                    <li>Create OAuth 2.0 credentials (Desktop app)</li>
+                    <li>Download credentials.json to the application directory</li>
+                    <li>Restart the application and authenticate</li>
+                </ol>
+            </div>
+        {% endif %}
+
+        <button class="btn" onclick="testAuth()">Test Authentication</button>
+        <div id="auth-result" style="margin-top: 10px;"></div>
+    </div>
+
+    <hr style="margin: 30px 0; border: none; border-top: 1px solid #ecf0f1;">
+
+    <div class="setup-section">
+        <h3>2. Application Settings</h3>
+
+        <form method="POST" action="{{ url_for('setup') }}">
+            <div class="form-group">
+                <label for="timezone">Timezone</label>
+                <select id="timezone" name="timezone" required>
+                    {% for tz in timezones %}
+                        <option value="{{ tz }}" {% if tz == settings.timezone %}selected{% endif %}>
+                            {{ tz }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="schedule_day">Weekly Summary Day</label>
+                <select id="schedule_day" name="schedule_day" required>
+                    <option value="sunday" {% if settings.schedule_day == 'sunday' %}selected{% endif %}>Sunday</option>
+                    <option value="monday" {% if settings.schedule_day == 'monday' %}selected{% endif %}>Monday</option>
+                    <option value="tuesday" {% if settings.schedule_day == 'tuesday' %}selected{% endif %}>Tuesday</option>
+                    <option value="wednesday" {% if settings.schedule_day == 'wednesday' %}selected{% endif %}>Wednesday</option>
+                    <option value="thursday" {% if settings.schedule_day == 'thursday' %}selected{% endif %}>Thursday</option>
+                    <option value="friday" {% if settings.schedule_day == 'friday' %}selected{% endif %}>Friday</option>
+                    <option value="saturday" {% if settings.schedule_day == 'saturday' %}selected{% endif %}>Saturday</option>
+                </select>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="form-group">
+                    <label for="schedule_hour">Hour (0-23)</label>
+                    <input type="number" id="schedule_hour" name="schedule_hour"
+                           min="0" max="23" value="{{ settings.schedule_hour }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="schedule_minute">Minute (0-59)</label>
+                    <input type="number" id="schedule_minute" name="schedule_minute"
+                           min="0" max="59" value="{{ settings.schedule_minute }}" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="lookback_days">Lookback Days (how many days to analyze)</label>
+                <input type="number" id="lookback_days" name="lookback_days"
+                       min="1" max="30" value="{{ settings.lookback_days }}" required>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="auto_email_enabled" name="auto_email_enabled"
+                       {% if settings.auto_email_enabled %}checked{% endif %}>
+                <label for="auto_email_enabled">Send automatic email summaries</label>
+            </div>
+
+            <button type="submit" class="btn btn-success">Save Settings</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    .setup-section {
+        margin: 20px 0;
+    }
+
+    .setup-section h3 {
+        color: #34495e;
+        margin-bottom: 15px;
+    }
+
+    .setup-section ol {
+        line-height: 1.8;
+    }
+
+    .setup-section ol li {
+        margin: 5px 0;
+    }
+</style>
+
+<script>
+function testAuth() {
+    const resultDiv = document.getElementById('auth-result');
+    resultDiv.innerHTML = '<p style="color: #3498db;">Testing authentication...</p>';
+
+    fetch('/api/test-auth')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                resultDiv.innerHTML = `<p style="color: #27ae60;">✅ Authenticated as: ${data.email}</p>`;
+            } else {
+                resultDiv.innerHTML = `<p style="color: #e74c3c;">❌ Authentication failed: ${data.error}</p>`;
+            }
+        })
+        .catch(error => {
+            resultDiv.innerHTML = `<p style="color: #e74c3c;">❌ Error: ${error}</p>`;
+        });
+}
+</script>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}Summary - Productivity Analyzer{% endblock %}
+
+{% block extra_css %}
+<style>
+    .summary-content {
+        line-height: 1.8;
+    }
+
+    .summary-content h1 {
+        color: #2c3e50;
+        font-size: 28px;
+        margin-bottom: 20px;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 10px;
+    }
+
+    .summary-content h2 {
+        color: #34495e;
+        font-size: 22px;
+        margin-top: 30px;
+        margin-bottom: 15px;
+    }
+
+    .summary-content h3 {
+        color: #7f8c8d;
+        font-size: 18px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .summary-content p {
+        margin-bottom: 15px;
+    }
+
+    .summary-content ul {
+        margin-left: 20px;
+        margin-bottom: 15px;
+    }
+
+    .summary-content li {
+        margin-bottom: 8px;
+    }
+
+    .summary-content strong {
+        color: #2c3e50;
+    }
+
+    .summary-content hr {
+        margin: 30px 0;
+        border: none;
+        border-top: 1px solid #ecf0f1;
+    }
+
+    .summary-meta {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        color: #7f8c8d;
+    }
+
+    .back-button {
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="back-button">
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">← Back to Dashboard</a>
+</div>
+
+<div class="card">
+    <div class="summary-meta">
+        <strong>Generated:</strong> {{ summary_data.date[:19] }} |
+        <strong>Period:</strong> {{ summary_data.lookback_days }} day{% if summary_data.lookback_days != 1 %}s{% endif %}
+    </div>
+
+    <div class="summary-content">
+        {% if report_content.startswith('#') %}
+            {# Markdown content - render as-is with basic formatting #}
+            {% for line in report_content.split('\n') %}
+                {% if line.startswith('# ') %}
+                    <h1>{{ line[2:] }}</h1>
+                {% elif line.startswith('## ') %}
+                    <h2>{{ line[3:] }}</h2>
+                {% elif line.startswith('### ') %}
+                    <h3>{{ line[4:] }}</h3>
+                {% elif line.startswith('- ') %}
+                    <li>{{ line[2:] }}</li>
+                {% elif line.startswith('**') and line.endswith('**') %}
+                    <p><strong>{{ line[2:-2] }}</strong></p>
+                {% elif line.strip() == '---' %}
+                    <hr>
+                {% elif line.strip() %}
+                    <p>{{ line }}</p>
+                {% endif %}
+            {% endfor %}
+        {% elif report_content.startswith('<!DOCTYPE') or report_content.startswith('<html') %}
+            {# HTML content - render directly #}
+            {{ report_content | safe }}
+        {% else %}
+            {# Plain text - wrap in paragraphs #}
+            {% for paragraph in report_content.split('\n\n') %}
+                <p>{{ paragraph | replace('\n', '<br>') | safe }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

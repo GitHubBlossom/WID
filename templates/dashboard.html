@@ -1,240 +1,131 @@
 {% extends "base.html" %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}Dashboard - Productivity Analyzer{% endblock %}
 
 {% block content %}
-<div class="dashboard">
-    <div class="page-header">
-        <h2>Dashboard</h2>
-        <p>Week of {{ week_start }}</p>
+<div class="card">
+    <h2>📊 Dashboard</h2>
+
+    <div class="dashboard-actions">
+        <form method="POST" action="{{ url_for('run_summary') }}" style="display: inline-block; margin-right: 10px;">
+            <input type="hidden" name="lookback_days" value="{{ settings.lookback_days }}">
+            <button type="submit" class="btn btn-success">▶️ Run Analysis Now</button>
+        </form>
+
+        <form method="POST" action="{{ url_for('run_summary') }}" style="display: inline-block;" onsubmit="return confirmCustomDays();">
+            <input type="number" name="lookback_days" id="custom_days" min="1" max="30" placeholder="Days"
+                   style="width: 80px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-right: 5px;">
+            <button type="submit" class="btn">Run Custom Period</button>
+        </form>
     </div>
 
-    <!-- Stats Cards -->
-    <div class="stats-grid">
-        <div class="stat-card">
-            <div class="stat-icon">📊</div>
-            <div class="stat-content">
-                <h3>{{ total_activities }}</h3>
-                <p>Activities</p>
-            </div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-icon">⏱️</div>
-            <div class="stat-content">
-                <h3>{{ total_hours }}</h3>
-                <p>Hours Tracked</p>
-            </div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-icon">🎯</div>
-            <div class="stat-content">
-                <h3>{{ completed_goals }}/{{ total_goals }}</h3>
-                <p>Goals Completed</p>
-            </div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-icon">✅</div>
-            <div class="stat-content">
-                <h3>{{ todos|length }}</h3>
-                <p>Pending To-Dos</p>
-            </div>
-        </div>
+    {% if next_run %}
+    <div style="background-color: #e8f4f8; padding: 15px; border-radius: 4px; margin-top: 20px;">
+        <strong>🔔 Next Scheduled Run:</strong> {{ next_run.strftime('%A, %B %d, %Y at %I:%M %p %Z') }}
     </div>
-
-    <!-- Activity Breakdown -->
-    <div class="dashboard-section">
-        <h3>Activity Breakdown</h3>
-        <div class="category-breakdown">
-            {% for category, stats in category_stats.items() %}
-            <div class="category-item">
-                <div class="category-header">
-                    <span class="category-name">{{ category }}</span>
-                    <span class="category-count">{{ stats.count }} activities</span>
-                </div>
-                <div class="category-bar">
-                    <div class="category-bar-fill" style="width: {{ (stats.hours / total_hours * 100) if total_hours > 0 else 0 }}%"></div>
-                </div>
-                <div class="category-hours">{{ stats.hours|round(1) }} hours</div>
-            </div>
-            {% endfor %}
-        </div>
+    {% else %}
+    <div style="background-color: #fff3cd; padding: 15px; border-radius: 4px; margin-top: 20px;">
+        <strong>⚠️ No scheduled runs configured.</strong> Go to <a href="{{ url_for('setup') }}">Settings</a> to configure automatic summaries.
     </div>
-
-    <!-- Two Column Layout -->
-    <div class="dashboard-grid">
-        <!-- Recent Activities -->
-        <div class="dashboard-section">
-            <div class="section-header">
-                <h3>Recent Activities</h3>
-                <a href="{{ url_for('activities') }}" class="btn-link">View All</a>
-            </div>
-            {% if activities %}
-            <div class="activity-list">
-                {% for activity in activities %}
-                <div class="activity-item">
-                    <div class="activity-icon">
-                        {% if activity.source == 'gmail' %}📧
-                        {% elif activity.source == 'calendar' %}📅
-                        {% elif activity.source == 'drive' %}📄
-                        {% else %}✍️{% endif %}
-                    </div>
-                    <div class="activity-content">
-                        <h4>{{ activity.title }}</h4>
-                        <p>{{ activity.description[:100] }}{% if activity.description|length > 100 %}...{% endif %}</p>
-                        <small>{{ activity.date }} • {{ activity.category }}</small>
-                    </div>
-                    {% if activity.duration_minutes %}
-                    <div class="activity-duration">{{ activity.duration_minutes }} min</div>
-                    {% endif %}
-                </div>
-                {% endfor %}
-            </div>
-            {% else %}
-            <p class="empty-state">No activities logged this week. <a href="{{ url_for('add_activity') }}">Add one now</a>!</p>
-            {% endif %}
-        </div>
-
-        <!-- Weekly Goals -->
-        <div class="dashboard-section">
-            <div class="section-header">
-                <h3>Weekly Goals</h3>
-                <a href="{{ url_for('goals') }}" class="btn-link">View All</a>
-            </div>
-            {% if goals %}
-            <div class="goals-list">
-                {% for goal in goals %}
-                <div class="goal-item goal-{{ goal.status }}">
-                    <div class="goal-content">
-                        <h4>{{ goal.title }}</h4>
-                        <p>{{ goal.description }}</p>
-                        <span class="goal-status">{{ goal.status.replace('_', ' ').title() }}</span>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            {% else %}
-            <p class="empty-state">No goals set for this week. <a href="{{ url_for('add_goal') }}">Set one now</a>!</p>
-            {% endif %}
-        </div>
-    </div>
-
-    <!-- Insights and To-Dos Row -->
-    <div class="dashboard-grid">
-        <!-- AI Insights -->
-        <div class="dashboard-section">
-            <div class="section-header">
-                <h3>AI Insights</h3>
-                <a href="{{ url_for('insights') }}" class="btn-link">View All</a>
-            </div>
-            {% if insights %}
-            <div class="insights-list">
-                {% for insight in insights %}
-                <div class="insight-item insight-{{ insight.insight_type }}">
-                    <h4>{{ insight.title }}</h4>
-                    <p>{{ insight.content }}</p>
-                    <small>{{ insight.insight_type.title() }} • Confidence: {{ (insight.confidence * 100)|round }}%</small>
-                </div>
-                {% endfor %}
-            </div>
-            {% else %}
-            <p class="empty-state">No insights yet. <button class="btn btn-primary" onclick="generateInsights()">Generate Insights</button></p>
-            {% endif %}
-        </div>
-
-        <!-- To-Dos -->
-        <div class="dashboard-section">
-            <div class="section-header">
-                <h3>To-Do List</h3>
-                <a href="{{ url_for('todos') }}" class="btn-link">View All</a>
-            </div>
-            {% if todos %}
-            <div class="todos-list">
-                {% for todo in todos %}
-                <div class="todo-item todo-{{ todo.priority }}">
-                    <input type="checkbox" onchange="updateTodoStatus('{{ todo.id }}', 'completed')">
-                    <div class="todo-content">
-                        <h4>{{ todo.title }}</h4>
-                        <p>{{ todo.description }}</p>
-                        <span class="todo-priority">{{ todo.priority }}</span>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            {% else %}
-            <p class="empty-state">No pending to-dos!</p>
-            {% endif %}
-        </div>
-    </div>
-
-    <!-- Quick Actions -->
-    <div class="quick-actions">
-        <a href="{{ url_for('add_activity') }}" class="btn btn-primary">+ Log Activity</a>
-        <a href="{{ url_for('add_goal') }}" class="btn btn-secondary">+ Add Goal</a>
-        <button class="btn btn-secondary" onclick="syncGoogle()">🔄 Sync Google Data</button>
-        <button class="btn btn-secondary" onclick="generateInsights()">🤖 Generate Insights</button>
-    </div>
+    {% endif %}
 </div>
 
+<div class="card">
+    <h2>📅 History</h2>
+
+    {% if summaries_by_week %}
+        {% for week_key, week_data in summaries_by_week.items()|sort(reverse=True) %}
+        <div class="week-group">
+            <h3>{{ week_data.week_display }}</h3>
+
+            <div class="summaries-list">
+                {% for summary in week_data.summaries %}
+                <div class="summary-item">
+                    <div class="summary-info">
+                        <strong>{{ summary.date_display }}</strong>
+                        <span class="summary-meta">
+                            ({{ summary.lookback_days }} day{% if summary.lookback_days != 1 %}s{% endif %})
+                        </span>
+                    </div>
+                    <div class="summary-actions">
+                        <a href="{{ url_for('view_summary', date=summary.date_str) }}" class="btn btn-secondary">View</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p style="color: #7f8c8d; text-align: center; padding: 40px;">
+            No summaries generated yet. Click "Run Analysis Now" to generate your first summary!
+        </p>
+    {% endif %}
+</div>
+
+<style>
+    .dashboard-actions {
+        margin-bottom: 20px;
+    }
+
+    .week-group {
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #ecf0f1;
+    }
+
+    .week-group:last-child {
+        border-bottom: none;
+    }
+
+    .week-group h3 {
+        color: #34495e;
+        margin-bottom: 15px;
+        font-size: 18px;
+    }
+
+    .summaries-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .summary-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+    }
+
+    .summary-item:hover {
+        background-color: #e9ecef;
+    }
+
+    .summary-info {
+        flex: 1;
+    }
+
+    .summary-meta {
+        color: #7f8c8d;
+        font-size: 14px;
+        margin-left: 10px;
+    }
+
+    .summary-actions {
+        margin-left: 20px;
+    }
+</style>
+
 <script>
-function syncGoogle() {
-    if (!confirm('Sync data from Google services? This may take a moment.')) return;
-
-    fetch('/sync/google', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({days: 7})
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert(`Synced ${data.activities_synced} activities!`);
-            location.reload();
-        } else {
-            alert('Error syncing data: ' + data.error);
-        }
-    })
-    .catch(error => {
-        alert('Error: ' + error);
-    });
-}
-
-function generateInsights() {
-    if (!confirm('Generate AI insights for this week? This may take a moment.')) return;
-
-    fetch('/insights/generate', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({week_start: '{{ week_start }}'})
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert(`Generated ${data.insights_count} insights and ${data.todos_count} to-dos!`);
-            location.reload();
-        } else {
-            alert('Error generating insights: ' + data.error);
-        }
-    })
-    .catch(error => {
-        alert('Error: ' + error);
-    });
-}
-
-function updateTodoStatus(todoId, status) {
-    fetch(`/todos/${todoId}/update_status`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({status: status})
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            location.reload();
-        }
-    });
+function confirmCustomDays() {
+    const days = document.getElementById('custom_days').value;
+    if (!days || days < 1) {
+        alert('Please enter a valid number of days (1-30)');
+        return false;
+    }
+    return confirm(`Generate summary for the past ${days} day(s)?`);
 }
 </script>
 {% endblock %}

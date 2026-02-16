@@ -24,7 +24,7 @@ GOOGLE_SCOPES = [
 # Anthropic API Configuration
 ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY', '')
 
-# Scheduler Configuration
+# Scheduler Configuration (defaults - can be overridden by web UI settings)
 SCHEDULE_DAY = os.getenv('SCHEDULE_DAY', 'sunday').lower()
 SCHEDULE_HOUR = int(os.getenv('SCHEDULE_HOUR', '18'))
 SCHEDULE_MINUTE = int(os.getenv('SCHEDULE_MINUTE', '0'))
@@ -33,7 +33,7 @@ TIMEZONE = os.getenv('TIMEZONE', 'America/New_York')
 # Report Configuration
 REPORT_OUTPUT_DIR = BASE_DIR / os.getenv('REPORT_OUTPUT_DIR', 'reports')
 REPORT_FORMAT = os.getenv('REPORT_FORMAT', 'markdown').lower()
-LOOKBACK_DAYS = int(os.getenv('LOOKBACK_DAYS', '7'))
+LOOKBACK_DAYS = int(os.getenv('LOOKBACK_DAYS', '1'))  # Default to 1 day (yesterday)
 
 # Email Configuration (optional)
 SEND_EMAIL = os.getenv('SEND_EMAIL', 'false').lower() == 'true'
