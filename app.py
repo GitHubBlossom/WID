@@ -139,7 +139,43 @@ def schedule_weekly_summary():
 
 # Routes
 
+# Marketing pages
 @app.route('/')
+def home():
+    """Marketing home page."""
+    return render_template('home.html')
+
+
+@app.route('/docs')
+def docs():
+    """Documentation page."""
+    return render_template('docs.html')
+
+
+@app.route('/contact')
+def contact():
+    """Contact page."""
+    return render_template('contact.html')
+
+
+@app.route('/contact', methods=['POST'])
+def contact_submit():
+    """Handle contact form submission."""
+    name = request.form.get('name')
+    email = request.form.get('email')
+    subject = request.form.get('subject')
+    message = request.form.get('message')
+
+    # TODO: Implement email sending or save to database
+    logger.info(f"Contact form submission from {name} ({email}): {subject}")
+
+    flash('Thank you for your message! We\'ll get back to you soon.', 'success')
+    return redirect(url_for('contact'))
+
+
+# App dashboard pages
+@app.route('/app')
+@app.route('/dashboard')
 def index():
     """Dashboard page."""
     # Check if OAuth is configured

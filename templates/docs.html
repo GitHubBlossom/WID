@@ -1,0 +1,315 @@
+{% extends "marketing_base.html" %}
+
+{% block title %}Documentation - WhatIDid.ai{% endblock %}
+
+{% block extra_css %}
+<style>
+    .docs-hero {
+        padding: 80px 0 60px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        text-align: center;
+    }
+
+    .docs-hero h1 {
+        font-size: 48px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .docs-hero p {
+        font-size: 20px;
+        opacity: 0.95;
+    }
+
+    .docs-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 80px 40px;
+    }
+
+    .docs-container h2 {
+        font-size: 36px;
+        font-weight: 700;
+        margin-top: 60px;
+        margin-bottom: 25px;
+        color: #1a1a1a;
+        padding-bottom: 15px;
+        border-bottom: 3px solid;
+        border-image: linear-gradient(90deg, #667eea 0%, #764ba2 100%) 1;
+    }
+
+    .docs-container h2:first-child {
+        margin-top: 0;
+    }
+
+    .docs-container h3 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-top: 40px;
+        margin-bottom: 15px;
+        color: #1a1a1a;
+    }
+
+    .docs-container p {
+        color: #666;
+        line-height: 1.8;
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+
+    .docs-container ol,
+    .docs-container ul {
+        margin-bottom: 25px;
+        padding-left: 30px;
+    }
+
+    .docs-container li {
+        color: #666;
+        line-height: 1.8;
+        margin-bottom: 12px;
+    }
+
+    .docs-container code {
+        background-color: #f5f5f5;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-family: 'Monaco', 'Menlo', monospace;
+        font-size: 14px;
+        color: #667eea;
+    }
+
+    .docs-container pre {
+        background-color: #1a1a1a;
+        color: #f5f5f5;
+        padding: 20px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin-bottom: 25px;
+    }
+
+    .docs-container pre code {
+        background: none;
+        color: #f5f5f5;
+        padding: 0;
+    }
+
+    .info-box {
+        background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%);
+        border-left: 4px solid #667eea;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 30px 0;
+    }
+
+    .info-box p {
+        margin: 0;
+        color: #1a1a1a;
+    }
+
+    .info-box strong {
+        color: #667eea;
+    }
+
+    .cta-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px;
+        border-radius: 16px;
+        text-align: center;
+        margin: 60px 0;
+    }
+
+    .cta-box h3 {
+        font-size: 28px;
+        margin-bottom: 15px;
+        color: white;
+    }
+
+    .cta-box p {
+        font-size: 18px;
+        margin-bottom: 25px;
+        opacity: 0.95;
+        color: white;
+    }
+
+    .cta-box a {
+        display: inline-block;
+        padding: 14px 32px;
+        background: white;
+        color: #667eea;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: transform 0.3s ease;
+    }
+
+    .cta-box a:hover {
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+        .docs-hero h1 {
+            font-size: 36px;
+        }
+
+        .docs-container {
+            padding: 60px 20px;
+        }
+
+        .docs-container h2 {
+            font-size: 28px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="docs-hero">
+    <div class="container">
+        <h1>Documentation</h1>
+        <p>Everything you need to get started with WhatIDid.ai</p>
+    </div>
+</section>
+
+<div class="docs-container">
+    <h2 id="getting-started">Getting Started</h2>
+    <p>WhatIDid.ai is an intelligent productivity tool that automatically analyzes your Gmail, Google Calendar, and Google Drive activity to generate insightful weekly summaries powered by AI.</p>
+
+    <h3>Prerequisites</h3>
+    <ul>
+        <li>A Google account (Gmail, Calendar, Drive)</li>
+        <li>An Anthropic API key (get one at <a href="https://console.anthropic.com/" target="_blank">console.anthropic.com</a>)</li>
+        <li>Python 3.8 or higher (if self-hosting)</li>
+    </ul>
+
+    <h2 id="setup">Setup Guide</h2>
+
+    <h3>Step 1: Google API Setup</h3>
+    <ol>
+        <li>Go to <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a></li>
+        <li>Create a new project or select an existing one</li>
+        <li>Enable the following APIs:
+            <ul>
+                <li>Gmail API</li>
+                <li>Google Calendar API</li>
+                <li>Google Drive API</li>
+            </ul>
+        </li>
+        <li>Create OAuth 2.0 credentials:
+            <ul>
+                <li>Navigate to "Credentials" → "Create Credentials" → "OAuth client ID"</li>
+                <li>Choose "Desktop app" as the application type</li>
+                <li>Download the credentials file</li>
+            </ul>
+        </li>
+        <li>Save the credentials file as <code>credentials.json</code> in the project directory</li>
+    </ol>
+
+    <div class="info-box">
+        <p><strong>💡 Tip:</strong> WhatIDid.ai only requests read-only access to your data. Your information stays private and secure.</p>
+    </div>
+
+    <h3>Step 2: Anthropic API Key</h3>
+    <ol>
+        <li>Visit <a href="https://console.anthropic.com/" target="_blank">Anthropic Console</a></li>
+        <li>Create an account or sign in</li>
+        <li>Generate a new API key</li>
+        <li>Copy the API key (it starts with <code>sk-ant-</code>)</li>
+    </ol>
+
+    <h3>Step 3: Configuration</h3>
+    <p>Add your Anthropic API key in the Settings page:</p>
+    <ol>
+        <li>Launch the dashboard</li>
+        <li>Go to Settings</li>
+        <li>Enter your API key in the <code>.env</code> file:
+            <pre><code>ANTHROPIC_API_KEY=sk-ant-your_api_key_here</code></pre>
+        </li>
+        <li>Configure your preferences:
+            <ul>
+                <li>Timezone</li>
+                <li>Weekly summary schedule</li>
+                <li>Lookback period (default: 1 day)</li>
+            </ul>
+        </li>
+    </ol>
+
+    <h2 id="features">Features</h2>
+
+    <h3>Email Analysis</h3>
+    <p>WhatIDid.ai analyzes your Gmail activity to provide insights on:</p>
+    <ul>
+        <li>Number of emails sent and received</li>
+        <li>Top contacts you communicated with</li>
+        <li>Email subject patterns and themes</li>
+    </ul>
+
+    <h3>Calendar Insights</h3>
+    <p>Get a clear picture of your meeting patterns:</p>
+    <ul>
+        <li>Total events and meetings attended</li>
+        <li>Time spent in meetings</li>
+        <li>Meeting attendees and collaboration patterns</li>
+    </ul>
+
+    <h3>Document Tracking</h3>
+    <p>Monitor your Google Drive activity:</p>
+    <ul>
+        <li>Documents created and modified</li>
+        <li>Types of files worked on (Docs, Sheets, Slides)</li>
+        <li>Recent document activity</li>
+    </ul>
+
+    <h3>AI-Powered Summaries</h3>
+    <p>Claude AI generates intelligent summaries that include:</p>
+    <ul>
+        <li>Executive summary of your week</li>
+        <li>Key meetings and collaborations</li>
+        <li>Main projects and focus areas</li>
+        <li>Actionable insights and recommendations</li>
+    </ul>
+
+    <h2 id="usage">Using WhatIDid.ai</h2>
+
+    <h3>Manual Summaries</h3>
+    <p>Generate summaries on-demand from the dashboard:</p>
+    <ol>
+        <li>Click "Run Analysis Now" for the default period</li>
+        <li>Or enter a custom number of days to analyze</li>
+        <li>View your summary immediately</li>
+    </ol>
+
+    <h3>Automated Summaries</h3>
+    <p>Configure automatic weekly summaries:</p>
+    <ol>
+        <li>Go to Settings</li>
+        <li>Choose your preferred day and time</li>
+        <li>Enable automatic email delivery (optional)</li>
+        <li>Save your settings</li>
+    </ol>
+
+    <h3>Viewing History</h3>
+    <p>Access all past summaries from the dashboard. Summaries are organized by calendar week for easy navigation.</p>
+
+    <h2 id="faq">Frequently Asked Questions</h2>
+
+    <h3>Is my data secure?</h3>
+    <p>Yes! WhatIDid.ai only requests read-only access to your Google services. All credentials are stored locally, and only summary data (not full email or document content) is sent to Anthropic's AI for analysis.</p>
+
+    <h3>What does it cost?</h3>
+    <p>WhatIDid.ai is free to use. You only need to provide your own Anthropic API key, which has generous free tier usage.</p>
+
+    <h3>Can I customize the analysis period?</h3>
+    <p>Yes! You can analyze any period from 1 to 30 days. The default is set to analyze yesterday's activity.</p>
+
+    <h3>How do I disconnect my Google account?</h3>
+    <p>Simply delete the <code>token.json</code> file from the application directory to revoke access.</p>
+
+    <div class="cta-box">
+        <h3>Ready to Get Started?</h3>
+        <p>Launch the dashboard and start analyzing your productivity</p>
+        <a href="{{ url_for('index') }}">Go to Dashboard →</a>
+    </div>
+</div>
+{% endblock %}
