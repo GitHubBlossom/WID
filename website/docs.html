@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - WhatIDid.ai</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #ffffff;
+        }
+
+        /* ── Navigation ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+        .nav-brand img { height: 50px; width: 50px; object-fit: contain; }
+        .nav-brand h1 {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-links { display: flex; gap: 40px; align-items: center; }
+        .nav-links a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 15px;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-cta {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white !important;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 12px rgba(102,126,234,0.3);
+        }
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102,126,234,0.4); }
+
+        /* ── Main ── */
+        main { margin-top: 80px; }
+
+        /* ── Docs Hero ── */
+        .docs-hero {
+            padding: 80px 0 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+        .docs-hero h1 { font-size: 48px; font-weight: 700; margin-bottom: 20px; }
+        .docs-hero p { font-size: 20px; opacity: 0.95; }
+
+        /* ── Docs Content ── */
+        .docs-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+        .docs-container h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-top: 60px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, #667eea 0%, #764ba2 100%) 1;
+        }
+        .docs-container h2:first-child { margin-top: 0; }
+        .docs-container h3 { font-size: 24px; font-weight: 600; margin-top: 40px; margin-bottom: 15px; }
+        .docs-container p { color: #555; line-height: 1.8; margin-bottom: 20px; font-size: 16px; }
+        .docs-container ol, .docs-container ul { margin-bottom: 25px; padding-left: 30px; }
+        .docs-container li { color: #555; line-height: 1.8; margin-bottom: 10px; }
+        .docs-container a { color: #667eea; text-decoration: none; }
+        .docs-container a:hover { text-decoration: underline; }
+        .docs-container code {
+            background-color: #f5f5f5;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            color: #667eea;
+        }
+        .docs-container pre {
+            background-color: #1a1a1a;
+            color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 25px;
+        }
+        .docs-container pre code { background: none; color: #f5f5f5; padding: 0; }
+        .info-box {
+            background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .info-box p { margin: 0; color: #1a1a1a; }
+        .info-box strong { color: #667eea; }
+        .cta-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin: 60px 0;
+        }
+        .cta-box h3 { font-size: 28px; margin-bottom: 15px; color: white; }
+        .cta-box p { font-size: 18px; margin-bottom: 25px; opacity: 0.95; color: white; }
+        .cta-box a {
+            display: inline-block;
+            padding: 14px 32px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        .cta-box a:hover { transform: translateY(-2px); }
+
+        /* ── Footer ── */
+        footer { background-color: #1a1a1a; color: white; padding: 60px 0 30px; margin-top: 0; }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+        .footer-brand h2 {
+            font-size: 24px; margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .footer-brand p { color: #999; line-height: 1.8; }
+        .footer-section h3 { font-size: 16px; margin-bottom: 20px; font-weight: 600; }
+        .footer-section ul { list-style: none; }
+        .footer-section ul li { margin-bottom: 12px; }
+        .footer-section ul li a { color: #999; text-decoration: none; transition: color 0.3s; }
+        .footer-section ul li a:hover { color: #667eea; }
+        .footer-bottom {
+            max-width: 1200px; margin: 0 auto; padding: 30px 40px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center; color: #666; font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            nav .container { padding: 15px 20px; }
+            .nav-links { gap: 20px; }
+            .docs-hero h1 { font-size: 36px; }
+            .docs-container { padding: 60px 20px; }
+            .docs-container h2 { font-size: 28px; }
+            .footer-content { grid-template-columns: 1fr; gap: 40px; padding: 0 20px; }
+            .footer-bottom { padding: 30px 20px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <a href="index.html" class="nav-brand">
+                <img src="img/logo-icon.png" alt="WhatIDid.ai" onerror="this.style.display='none'">
+                <h1>WhatIDid.ai</h1>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="docs.html">Docs</a>
+                <a href="contact.html">Contact</a>
+                <a href="http://localhost:5555/app" class="nav-cta">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="docs-hero">
+            <div class="container">
+                <h1>Documentation</h1>
+                <p>Everything you need to get started with WhatIDid.ai</p>
+            </div>
+        </section>
+
+        <div class="docs-container">
+            <h2 id="getting-started">Getting Started</h2>
+            <p>WhatIDid.ai is an intelligent productivity tool that automatically analyzes your Gmail, Google Calendar, and Google Drive activity to generate insightful weekly summaries powered by AI.</p>
+
+            <h3>Prerequisites</h3>
+            <ul>
+                <li>A Google account (Gmail, Calendar, Drive)</li>
+                <li>An Anthropic API key — get one at <a href="https://console.anthropic.com/" target="_blank">console.anthropic.com</a></li>
+                <li>Python 3.8 or higher</li>
+            </ul>
+
+            <h2 id="setup">Setup Guide</h2>
+
+            <h3>Step 1: Google API Setup</h3>
+            <ol>
+                <li>Go to <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a></li>
+                <li>Create a new project or select an existing one</li>
+                <li>Enable the following APIs: Gmail API, Google Calendar API, Google Drive API</li>
+                <li>Create OAuth 2.0 credentials → "Credentials" → "Create Credentials" → "OAuth client ID" → choose "Desktop app"</li>
+                <li>Download the credentials file and save it as <code>credentials.json</code> in the project directory</li>
+            </ol>
+
+            <div class="info-box">
+                <p><strong>💡 Tip:</strong> WhatIDid.ai only requests read-only access to your data. Your information stays private and secure.</p>
+            </div>
+
+            <h3>Step 2: Anthropic API Key</h3>
+            <ol>
+                <li>Visit <a href="https://console.anthropic.com/" target="_blank">console.anthropic.com</a></li>
+                <li>Create an account or sign in</li>
+                <li>Generate a new API key (starts with <code>sk-ant-</code>)</li>
+                <li>Add it to your <code>.env</code> file:
+                    <pre><code>ANTHROPIC_API_KEY=sk-ant-your_api_key_here</code></pre>
+                </li>
+            </ol>
+
+            <h3>Step 3: Install &amp; Run</h3>
+            <pre><code>git clone https://github.com/GitHubBlossom/WID.git
+cd WID
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python app.py</code></pre>
+            <p>Then open <a href="http://localhost:5555" target="_blank">http://localhost:5555</a> in your browser.</p>
+
+            <h2 id="features">Features</h2>
+
+            <h3>Email Analysis</h3>
+            <ul>
+                <li>Number of emails sent and received</li>
+                <li>Top contacts you communicated with</li>
+                <li>Email subject patterns and themes</li>
+            </ul>
+
+            <h3>Calendar Insights</h3>
+            <ul>
+                <li>Total events and meetings attended</li>
+                <li>Time spent in meetings</li>
+                <li>Meeting attendees and collaboration patterns</li>
+            </ul>
+
+            <h3>Document Tracking</h3>
+            <ul>
+                <li>Documents created and modified (Docs, Sheets, Slides)</li>
+                <li>Recent document activity</li>
+            </ul>
+
+            <h3>AI-Powered Summaries</h3>
+            <ul>
+                <li>Executive summary of your week</li>
+                <li>Key meetings and collaborations</li>
+                <li>Main projects and focus areas</li>
+                <li>Actionable insights and recommendations</li>
+            </ul>
+
+            <h2 id="usage">Using WhatIDid.ai</h2>
+
+            <h3>Manual Summaries</h3>
+            <ol>
+                <li>Click "Run Analysis Now" for the default period</li>
+                <li>Or enter a custom number of days to analyze</li>
+                <li>View your summary immediately in the dashboard</li>
+            </ol>
+
+            <h3>Automated Summaries</h3>
+            <ol>
+                <li>Go to Settings</li>
+                <li>Choose your preferred day and time</li>
+                <li>Enable automatic email delivery (optional)</li>
+                <li>Save your settings</li>
+            </ol>
+
+            <h2 id="faq">Frequently Asked Questions</h2>
+
+            <h3>Is my data secure?</h3>
+            <p>Yes. WhatIDid.ai only requests read-only access to your Google services. All credentials are stored locally, and only summary data is sent to Anthropic's AI for analysis — never full email or document content.</p>
+
+            <h3>What does it cost?</h3>
+            <p>WhatIDid.ai is free to use. You only need your own Anthropic API key, which has a generous free tier.</p>
+
+            <h3>Can I customize the analysis period?</h3>
+            <p>Yes — you can analyze any period from 1 to 30 days. The default analyzes yesterday's activity.</p>
+
+            <h3>How do I disconnect my Google account?</h3>
+            <p>Delete the <code>token.json</code> file from the application directory to revoke access.</p>
+
+            <div class="cta-box">
+                <h3>Ready to Get Started?</h3>
+                <p>Launch the dashboard and start analyzing your productivity</p>
+                <a href="http://localhost:5555/app">Go to Dashboard →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>WhatIDid.ai</h2>
+                <p>Your intelligent productivity assistant. Automatically analyze your work week and get AI-powered insights into your productivity patterns.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Product</h3>
+                <ul>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="docs.html">Documentation</a></li>
+                    <li><a href="http://localhost:5555/app">Dashboard</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="docs.html">Getting Started</a></li>
+                    <li><a href="docs.html#setup">Setup Guide</a></li>
+                    <li><a href="docs.html#faq">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>WhatIDid.ai &copy; 2026 | Powered by Google APIs &amp; Claude AI</p>
+        </div>
+    </footer>
+
+</body>
+</html>

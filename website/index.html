@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatIDid.ai - Your Week Summarized with AI</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #ffffff;
+        }
+
+        /* ── Navigation ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+        .nav-brand img {
+            height: 50px;
+            width: 50px;
+            object-fit: contain;
+        }
+        .nav-brand h1 {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+        .nav-links a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 15px;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-cta {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white !important;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 12px rgba(102,126,234,0.3);
+        }
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102,126,234,0.4);
+        }
+
+        /* ── Shared ── */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+        main { margin-top: 80px; }
+
+        /* ── Hero ── */
+        .hero {
+            padding: 120px 0 100px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            justify-content: center;
+        }
+        .hero-logo { flex: 0 0 auto; }
+        .hero-logo img {
+            max-width: 350px;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.2));
+        }
+        .hero-text { flex: 1; text-align: left; max-width: 550px; }
+        .hero-text h1 {
+            font-size: 64px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            line-height: 1.15;
+        }
+        .hero-text p {
+            font-size: 22px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+        .hero-cta {
+            display: inline-block;
+            padding: 18px 40px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 18px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+        .hero-cta:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+
+        /* ── Features ── */
+        .features {
+            padding: 100px 0;
+            background-color: #f9fafb;
+        }
+        .section-header { text-align: center; margin-bottom: 80px; }
+        .section-header h2 { font-size: 48px; font-weight: 700; margin-bottom: 20px; }
+        .section-header p { font-size: 20px; color: #666; max-width: 600px; margin: 0 auto; }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+        .feature-icon { font-size: 48px; margin-bottom: 20px; }
+        .feature-card h3 { font-size: 22px; margin-bottom: 12px; }
+        .feature-card p { color: #666; line-height: 1.7; }
+
+        /* ── How it works ── */
+        .how-it-works { padding: 100px 0; }
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            margin-top: 60px;
+        }
+        .step { text-align: center; }
+        .step-number {
+            width: 60px; height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 auto 25px;
+        }
+        .step h3 { font-size: 22px; margin-bottom: 12px; }
+        .step p { color: #666; line-height: 1.7; }
+
+        /* ── CTA ── */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+        .cta-section h2 { font-size: 48px; font-weight: 700; margin-bottom: 25px; }
+        .cta-section p { font-size: 22px; margin-bottom: 40px; opacity: 0.95; }
+        .cta-button {
+            display: inline-block;
+            padding: 18px 40px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 18px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+
+        /* ── Footer ── */
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+        .footer-brand h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .footer-brand p { color: #999; line-height: 1.8; }
+        .footer-section h3 { font-size: 16px; margin-bottom: 20px; font-weight: 600; }
+        .footer-section ul { list-style: none; }
+        .footer-section ul li { margin-bottom: 12px; }
+        .footer-section ul li a { color: #999; text-decoration: none; transition: color 0.3s; }
+        .footer-section ul li a:hover { color: #667eea; }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 40px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 968px) {
+            .hero-content { flex-direction: column; gap: 40px; }
+            .hero-text { text-align: center; }
+            .hero-logo img { max-width: 280px; }
+        }
+        @media (max-width: 768px) {
+            nav .container { padding: 15px 20px; }
+            .nav-links { gap: 20px; }
+            .container { padding: 0 20px; }
+            .hero-text h1 { font-size: 40px; }
+            .hero-text p { font-size: 18px; }
+            .features-grid, .steps { grid-template-columns: 1fr; gap: 30px; }
+            .section-header h2 { font-size: 36px; }
+            .cta-section h2 { font-size: 36px; }
+            .footer-content { grid-template-columns: 1fr; gap: 40px; padding: 0 20px; }
+            .footer-bottom { padding: 30px 20px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <a href="index.html" class="nav-brand">
+                <img src="img/logo-icon.png" alt="WhatIDid.ai" onerror="this.style.display='none'">
+                <h1>WhatIDid.ai</h1>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="docs.html">Docs</a>
+                <a href="contact.html">Contact</a>
+                <!-- Update this URL to point to wherever your app is running -->
+                <a href="http://localhost:5555/app" class="nav-cta">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-logo">
+                        <img src="img/logo-full.png" alt="WhatIDid.ai Beaver Mascot" onerror="this.style.display='none'">
+                    </div>
+                    <div class="hero-text">
+                        <h1>Your Week, Summarized by AI</h1>
+                        <p>Automatically analyze your Gmail, Calendar, and Drive activity. Get intelligent insights into your productivity.</p>
+                        <a href="http://localhost:5555/app" class="hero-cta">Get Started Free →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features" id="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Everything You Need</h2>
+                    <p>Powerful features to help you understand and improve your work patterns</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <h3>AI-Powered Analysis</h3>
+                        <p>Claude AI analyzes your activity patterns and generates insightful summaries with actionable recommendations.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📧</div>
+                        <h3>Email Insights</h3>
+                        <p>Track sent and received emails, identify top contacts, and understand your communication patterns.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📅</div>
+                        <h3>Calendar Analytics</h3>
+                        <p>See meeting statistics, time spent in calls, and get a clear picture of where your time goes.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📄</div>
+                        <h3>Document Tracking</h3>
+                        <p>Monitor Google Docs, Sheets, and Slides activity to understand your project work.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⏰</div>
+                        <h3>Automated Summaries</h3>
+                        <p>Schedule weekly summaries to be generated automatically and delivered to your inbox.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Privacy First</h3>
+                        <p>All data stays local. Read-only access to your Google services. No data stored externally.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="how-it-works" id="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2>How It Works</h2>
+                    <p>Get started in minutes with our simple three-step process</p>
+                </div>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Connect Your Google Account</h3>
+                        <p>Securely connect Gmail, Calendar, and Drive with read-only permissions.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Configure Your Preferences</h3>
+                        <p>Choose your timezone, schedule, and how often you want summaries.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Get AI-Powered Insights</h3>
+                        <p>Receive beautiful summaries with actionable insights about your work week.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to Get Started?</h2>
+                <p>Start understanding your productivity patterns today</p>
+                <a href="http://localhost:5555/app" class="cta-button">Launch Dashboard →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>WhatIDid.ai</h2>
+                <p>Your intelligent productivity assistant. Automatically analyze your work week and get AI-powered insights into your productivity patterns.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Product</h3>
+                <ul>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="docs.html">Documentation</a></li>
+                    <li><a href="http://localhost:5555/app">Dashboard</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="docs.html">Getting Started</a></li>
+                    <li><a href="docs.html#setup">Setup Guide</a></li>
+                    <li><a href="docs.html#faq">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>WhatIDid.ai &copy; 2026 | Powered by Google APIs &amp; Claude AI</p>
+        </div>
+    </footer>
+
+</body>
+</html>
