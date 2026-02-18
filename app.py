@@ -279,6 +279,31 @@ def test_auth():
         }), 500
 
 
+@app.route('/contact', methods=['GET'])
+def contact():
+    """Contact page."""
+    return render_template('contact.html')
+
+
+@app.route('/contact/submit', methods=['POST'])
+def contact_submit():
+    """Handle contact form submission."""
+    name = request.form.get('name', '').strip()
+    email = request.form.get('email', '').strip()
+    subject = request.form.get('subject', '').strip()
+    message = request.form.get('message', '').strip()
+
+    if not all([name, email, subject, message]):
+        flash('Please fill in all fields.', 'error')
+        return redirect(url_for('contact'))
+
+    # Log the submission
+    logger.info(f"Contact form submission from {name} <{email}>: {subject}")
+
+    flash('Message sent! We\'ll get back to you soon.', 'success')
+    return redirect(url_for('contact'))
+
+
 def get_summaries_by_week():
     """Get all summaries grouped by calendar week."""
     summaries = []
