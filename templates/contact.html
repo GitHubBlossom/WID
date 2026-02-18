@@ -235,7 +235,9 @@
 
     <div class="contact-form-section">
         <h2>Send a Message</h2>
-        <form class="contact-form" method="POST" action="{{ url_for('contact_submit') }}">
+        <form class="contact-form" id="contactForm"
+              action="https://formspree.io/f/mykdpnvn"
+              method="POST">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required placeholder="Your name">
@@ -256,16 +258,43 @@
                 <textarea id="message" name="message" required placeholder="Tell us more..."></textarea>
             </div>
 
-            <button type="submit" class="submit-btn">Send Message</button>
-
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% for category, message in messages %}
-                    <div class="form-status {{ 'success' if category == 'success' else 'error' }}" style="display:block">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endwith %}
+            <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+            <div class="form-status" id="formStatus"></div>
         </form>
+
+        <script>
+            const form = document.getElementById('contactForm');
+            const statusEl = document.getElementById('formStatus');
+            const submitBtn = document.getElementById('submitBtn');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+                statusEl.className = 'form-status';
+
+                try {
+                    const res = await fetch(form.action, {
+                        method: 'POST',
+                        body: new FormData(form),
+                        headers: { Accept: 'application/json' }
+                    });
+                    if (res.ok) {
+                        statusEl.className = 'form-status success';
+                        statusEl.textContent = '✅ Message sent! We\'ll get back to you soon.';
+                        form.reset();
+                    } else {
+                        throw new Error('Server error');
+                    }
+                } catch {
+                    statusEl.className = 'form-status error';
+                    statusEl.textContent = '❌ Something went wrong. Please email us directly at hello@whatidid.ai';
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Message';
+                }
+            });
+        </script>
     </div>
 </div>
 {% endblock %}
